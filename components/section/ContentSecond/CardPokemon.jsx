@@ -6,6 +6,9 @@ import DetailsCard from "./DetailsCard";
 const CardPokemon = ({ pokemon }) => {
   const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
 
+  // console.log(pokemon.game_indices);
+  // return 0;
+
   const startDust = pokemon.game_indices
     .map((data) => data.game_index)
     .reduce((acc, arr) => acc + arr);

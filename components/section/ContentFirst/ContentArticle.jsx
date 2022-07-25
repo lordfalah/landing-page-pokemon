@@ -3,9 +3,10 @@ import Button from "../../button/Button";
 import Paragraf from "../../text/Paragraf";
 import Text from "../../text/Text";
 
-const ContentArticle = () => {
+const ContentArticle = ({ className }) => {
+  const addClass = className ? className : "";
   return (
-    <article className="space-y-5 w-1/2">
+    <article className={`${addClass}`}>
       <Text className="text-black font-bold">Gotta Catch Em All!</Text>
       <Paragraf>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci quos

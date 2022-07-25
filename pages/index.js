@@ -27,9 +27,7 @@ export default function Home() {
         <DataContext.Provider
           value={{ dataPokemon: dataPokemon, color: color }}
         >
-          {isOpen && (
-            <ModalCard className={`${isOpen ? "scale-100" : "scale-0"}`} />
-          )}
+          {isOpen && <ModalCard />}
         </DataContext.Provider>
       </ThemeCards.Provider>
 
@@ -41,7 +39,7 @@ export default function Home() {
         </Head>
 
         <div
-          className="bg-green-500/80 w-[55%] h-screen absolute top-0 right-0 z-0"
+          className="bg-green-500/80 w-[55%] h-screen absolute top-0 right-0 -z-20 lg:z-0"
           style={{
             clipPath: "polygon(20% 0%, 100% 0, 100% 100%, 0% 100%)",
             WebkitClipPath: "polygon(20% 0%, 100% 0, 100% 100%, 0% 100%)",
@@ -65,13 +63,13 @@ export default function Home() {
         </header>
 
         <section>
-          <Container>
-            <div className="flex items-center">
-              <ContentArticle />
-              <ContentImg />
+          <Container className="px-5 sm:px-0 space-y-10">
+            <div className="block lg:flex items-center">
+              <ContentArticle className="space-y-5 w-full lg:w-1/2" />
+              <ContentImg className="hidden" />
             </div>
 
-            <div className="flex w-5/12 gap-8">
+            <div className="flex w-full lg:w-5/12 gap-8">
               <ImgShow source="1.png" className="w-1/2" />
               <ImgShow source="3.png" className="w-1/2" />
             </div>
@@ -82,8 +80,8 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="bg-slate-500">
-          <Container className="mt-96 p-10 space-y-60">
+        <section className="bg-slate-500 mt-60">
+          <Container className="px-5 sm:px-0 space-y-60">
             <StateContext.Provider
               value={{
                 searchPokemon: searchPokemon,

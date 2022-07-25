@@ -5,6 +5,7 @@ import Button from "../../button/Button";
 import Paragraf from "../../text/Paragraf";
 import SubTitle from "../../text/SubTitle";
 import Image from "next/image";
+import Close from "../../../icon/Close";
 
 const ModalCard = ({ className }) => {
   const addClass = className ? className : "";
@@ -14,7 +15,7 @@ const ModalCard = ({ className }) => {
 
   const speed = dataPokemon.stats[0].base_stat;
   const specialDefense = dataPokemon?.stats[0]?.base_stat * 2;
-  const specialAttack = dataPokemon.stats
+  const specialAttack = dataPokemon?.stats
     .map((base) => base.base_stat)
     .reduce((acc, arr) => acc + arr);
   const defense = dataPokemon.weight + dataPokemon.height;
@@ -29,18 +30,13 @@ const ModalCard = ({ className }) => {
     { agility: "Attack", value: Math.floor(attack) },
   ];
 
-  const name =
-    dataPokemon?.name !== undefined &&
-    dataPokemon?.name[0]?.toUpperCase() + dataPokemon?.name.slice(1);
+  const name = dataPokemon?.name[0]?.toUpperCase() + dataPokemon?.name.slice(1);
   const slash = dataPokemon?.types !== undefined && dataPokemon?.types.length;
 
-  const typeOne =
-    dataPokemon?.types !== undefined && dataPokemon?.types[0]?.type?.name;
+  const typeOne = dataPokemon?.types[0]?.type?.name;
   const typeTwo = slash >= 2 && dataPokemon?.types[1]?.type?.name;
 
-  const ability =
-    dataPokemon?.abilities?.length !== undefined &&
-    dataPokemon?.abilities[0]?.ability?.name.toUpperCase();
+  const ability = dataPokemon?.abilities[0]?.ability?.name.toUpperCase();
 
   return (
     <div
@@ -116,8 +112,15 @@ const ModalCard = ({ className }) => {
         </div>
         <Button
           onClick={() => setIsOpen(false)}
-          className="absolute -right-4 -top-4 rounded-full bg-black w-12 h-12"
-        ></Button>
+          className="absolute -right-4 -top-4 rounded-full bg-white 
+          w-12 h-12 flex justify-center items-center shadow-md"
+        >
+          <Close
+            className="w-8 h-8 fill-pink-700/80 stroke-2 transition 
+            duration-100 ease-in hover:fill-red-700 hover:drop-shadow-lg 
+            hover:shadow-pink-600"
+          />
+        </Button>
 
         <div className="flex gap-10 w-full">
           <article className="text-right space-y-3 w-4/5">

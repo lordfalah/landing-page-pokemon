@@ -4,6 +4,7 @@ import api from "../../../api/api";
 import { StateContext } from "../../../pages";
 import CardPokemon from "./CardPokemon";
 import { ImSpinner9 } from "react-icons/im";
+import ErrorCustom from "../../suspense/Error";
 
 const ContentCard = () => {
   const { searchPokemon } = useContext(StateContext);
@@ -18,14 +19,12 @@ const ContentCard = () => {
 
   const getPokemon = async (value) => {
     const nameOfValue = value.toLowerCase();
-    let response;
 
     if (nameOfValue.length === 0) {
-      response = await Promise.all(pokemonPromise);
+      const response = await Promise.all(pokemonPromise);
       return response;
     } else {
-      response = await getPokemonId(nameOfValue);
-      console.log(nameOfValue);
+      const response = await getPokemonId(nameOfValue);
       return response;
     }
   };
@@ -45,7 +44,14 @@ const ContentCard = () => {
         <ImSpinner9 size="40px" className="animate-spin text-cyan-600" />
       )}
 
-      <div className="grid grid-cols-4 gap-x-7 gap-y-28">
+      {isLoading && <div className="text-2xl font-semibold">Loading...</div>}
+
+      {isError && <ErrorCustom error={error} />}
+
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+        xl:grid-cols-4 gap-x-7 gap-y-28"
+      >
         {isSuccess &&
           searchPokemon.length === 0 &&
           data?.map((pokemon) => {
@@ -55,8 +61,6 @@ const ContentCard = () => {
         {isSuccess && searchPokemon.length !== 0 && (
           <CardPokemon pokemon={data} />
         )}
-
-        {isLoading && <div className="text-2xl font-semibold">Loading...</div>}
       </div>
     </Fragment>
   );
