@@ -6,8 +6,12 @@ import Paragraf from "../../text/Paragraf";
 import SubTitle from "../../text/SubTitle";
 import Image from "next/image";
 import Close from "../../../icon/Close";
+import resizeWindow from "../../../hooks/rezizeWindow";
+import Container from "../../Content/Container";
 
 const ModalCard = ({ className }) => {
+  const { width } = resizeWindow();
+  const logic = width >= 640 ? 50 : 10;
   const addClass = className ? className : "";
 
   const { setIsOpen } = useContext(ThemeCards);
@@ -40,32 +44,33 @@ const ModalCard = ({ className }) => {
 
   return (
     <div
-      className={`fixed top-0 bottom-0 left-0 right-0 z-30 bg-black/50 
-    transition duration-300 ease-in-out ${addClass}`}
+      className={`fixed top-0 bottom-0 left-0 right-0 z-30 
+      bg-black/50 transition duration-300 ease-in-out ${addClass}`}
     >
-      <div
+      <Container
         style={{
           boxShadow: "0px 0px 40px 0px rgba(0,0,0,0.25) inset",
           WebkitBoxShadow: "0px 0px 40px 0px rgba(0,0,0,0.25) inset",
           MozBoxShadow: "0px 0px 40px 0px rgba(0,0,0,0.25) inset",
         }}
-        className={`fixed z-50 w-4/5 bg-white/80 mx-auto left-0 
-        right-0 top-1/2 -translate-y-1/2 rounded-lg py-8 px-20 gap-14
-        shadow-slate-600/50 grid grid-cols-2 items-center`}
+        className={`relative z-50 bg-white/80 left-0 w-11/12
+        right-0 top-1/2 -translate-y-1/2 rounded-lg py-10
+        lg:py-12 lg:px-10 xl:px-20 gap-10 lg:gap-14 shadow-slate-600/50 
+        grid grid-cols-1 lg:grid-cols-2 items-center`}
       >
         <div
-          className="bg-white/80 w-full rounded-xl relative 
-          shadow-lg"
+          className="bg-white/80 w-3/4 sm:w-2/3 md:w-1/2 lg:w-full rounded-xl 
+          relative shadow-lg mx-auto"
         >
           <div
-            className="bg-white rounded-full h-16 w-16 absolute -right-3
+            className="bg-white rounded-full h-14 w-14 sm:h-16 sm:w-16 absolute -right-3
             -top-5 shadow-md flex items-center justify-center p-4"
           >
             <SubTitle className="text-base">{dataPokemon?.weight}Kg</SubTitle>
           </div>
 
-          <article className="text-center py-8">
-            <div className="mx-auto w-1/4">
+          <article className="text-center py-8 space-y-4">
+            <div className="mx-auto w-2/6 xl:w-1/4">
               <Image
                 src={`${
                   dataPokemon?.sprites?.other?.dream_world?.front_default !==
@@ -81,24 +86,28 @@ const ModalCard = ({ className }) => {
               />
             </div>
 
-            <SubTitle className="text-2xl">{name}</SubTitle>
-            <div className="flex justify-center gap-3">
-              <Paragraf>{typeOne}</Paragraf>
-              {slash >= 2 && <span>/</span>}
-              {slash >= 2 && <Paragraf>{typeTwo}</Paragraf>}
+            <div>
+              <SubTitle className="text-2xl xl:text-3xl">{name}</SubTitle>
+              <div className="flex justify-center gap-3">
+                <Paragraf>{typeOne}</Paragraf>
+                {slash >= 2 && <span>/</span>}
+                {slash >= 2 && <Paragraf>{typeTwo}</Paragraf>}
+              </div>
             </div>
 
-            <div className="flex justify-center items-center gap-2">
-              <SubTitle className="text-lg text-red-800">Fighting </SubTitle>
-              <GoPrimitiveDot size="15px" className="text-slate-500/75" />
-              <SubTitle
-                className="text-lg"
-                style={{ color: `${color === "" ? "rgb(0, 0, 0)" : color}` }}
-              >
-                {ability}
-              </SubTitle>
+            <div className="">
+              <div className="flex justify-center items-center gap-2">
+                <SubTitle className="text-lg text-red-800">Fighting </SubTitle>
+                <GoPrimitiveDot size="15px" className="text-slate-500/75" />
+                <SubTitle
+                  className="text-lg"
+                  style={{ color: `${color === "" ? "rgb(0, 0, 0)" : color}` }}
+                >
+                  {ability}
+                </SubTitle>
+              </div>
+              <Paragraf>Skill test</Paragraf>
             </div>
-            <p>Skill test</p>
           </article>
 
           <div
@@ -122,35 +131,43 @@ const ModalCard = ({ className }) => {
           />
         </Button>
 
-        <div className="flex gap-10 w-full">
-          <article className="text-right space-y-3 w-4/5">
-            {detailsPokemons.map((poke, idx) => {
-              return <SubTitle key={idx}>{poke.agility}</SubTitle>;
-            })}
-          </article>
-          <div className="flex gap-8 w-full">
-            <div className="space-y-3">
-              {detailsPokemons.map((poke, idx) => {
-                return <Paragraf key={idx}>{poke.value}</Paragraf>;
-              })}
-            </div>
+        <div className="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-full px-5">
+          {detailsPokemons.map((poke, idx) => {
+            const percentage =
+              width !== undefined &&
+              Math.ceil(((width / 100) * poke.value) / logic);
 
-            <div className="w-full flex flex-col gap-5 items-center justify-center">
-              {detailsPokemons.map((poke, idx) => (
+            return (
+              <div
+                key={idx}
+                className="grid grid-cols-6 items-center my-3 gap-4 sm:gap-0"
+              >
+                <SubTitle className="col-span-2 text-left sm:text-right justify-items-end ">
+                  {poke.agility}
+                </SubTitle>
+                <Paragraf className="col-span-1 text-left sm:text-center">
+                  {poke.value}
+                </Paragraf>
                 <div
-                  key={idx}
-                  className="bg-black w-full h-4 rounded-md overflow-hidden"
+                  className="bg-black w-full h-4 rounded-md overflow-hidden
+                  col-span-3"
                 >
                   <div
-                    style={{ width: `${poke.value}px` }}
-                    className="bg-red-600 h-4"
+                    style={{
+                      width: `${
+                        percentage
+                          ? percentage.toString() + "%"
+                          : poke.value.toString() + "px"
+                      }`,
+                    }}
+                    className={`bg-red-600 h-4`}
                   ></div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
+      </Container>
     </div>
   );
 };
