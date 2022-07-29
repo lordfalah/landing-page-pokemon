@@ -72,7 +72,7 @@ const DetailsCard = ({ name }) => {
       <div className="w-full flex justify-center my-10">
         <Button
           className="bg-gradient-to-r from-green-400 to-blue-500/50
-          w-11/12 py-4"
+          w-11/12 py-3"
           onClick={() => handleDetails(name)}
         >
           <span className="font-medium text-white">DETAILS</span>

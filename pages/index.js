@@ -9,6 +9,8 @@ import ModalCard from "../components/section/ContentSecond/ModalCard";
 import SearchCards from "../components/section/ContentSecond/SearchCards";
 import ImgShow from "../components/slideImg/ImgShow";
 import SwapIcon from "../components/slideImg/SwapIcon";
+import Paragraf from "../components/text/Paragraf";
+import SubTitle from "../components/text/SubTitle";
 
 export const StateContext = React.createContext();
 export const ThemeContext = React.createContext();
@@ -47,7 +49,7 @@ export default function Home() {
         ></div>
 
         <div
-          className="z-20 w-20 fixed flex justify-center gap-4
+          className="z-20 fixed flex justify-center gap-4
         items-center bottom-0 top-0 my-auto mx-0 right-12 flex-col"
         >
           {[1, 2, 3].map((data) => (
@@ -80,15 +82,24 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="bg-slate-500 mt-60">
-          <Container className="px-5 sm:px-0 space-y-60">
+        <section className="bg-slate-700/20 mt-60">
+          <Container className="px-5 sm:px-0 py-10">
             <StateContext.Provider
               value={{
                 searchPokemon: searchPokemon,
                 setSearchPokemon: setSearchPokemon,
               }}
             >
-              <SearchCards />
+              <div className="text-center space-y-4">
+                <h2 className="text-5xl font-normal tracking-tight text-black/80">
+                  PokeDex
+                </h2>
+                <Paragraf className="text-black/50">
+                  Is your pokemon on our codex?
+                </Paragraf>
+                <SearchCards className="mx-auto" />
+              </div>
+
               <ThemeContext.Provider
                 value={{
                   setIsOpen: setIsOpen,

@@ -30,7 +30,7 @@ const CardPokemon = ({ pokemon }) => {
         />
       </div>
 
-      <div className="flex flex-col gap-6 items-center mt-28">
+      <div className="flex flex-col gap-6 items-center mt-20">
         <h2 className="text-xl">{name}</h2>
         <span
           className="block w-4/5 h-3 rounded-full

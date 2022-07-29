@@ -59,14 +59,17 @@ const ModalCard = ({ className }) => {
         grid grid-cols-1 lg:grid-cols-2 items-center`}
       >
         <div
-          className="bg-white/80 w-3/4 sm:w-2/3 md:w-1/2 lg:w-full rounded-xl 
+          className="bg-white/80 w-4/5 sm:w-2/3 md:w-1/2 lg:w-full rounded-xl 
           relative shadow-lg mx-auto"
         >
           <div
-            className="bg-white rounded-full h-14 w-14 sm:h-16 sm:w-16 absolute -right-3
-            -top-5 shadow-md flex items-center justify-center p-4"
+            className="bg-white rounded-full h-14 w-14 sm:h-16 sm:w-16 
+            absolute sm:-right-3 sm:-top-5 shadow-md flex items-center 
+            -bottom-5 -right-2 justify-center p-4"
           >
-            <SubTitle className="text-base">{dataPokemon?.weight}Kg</SubTitle>
+            <SubTitle className="text-sm sm:text-base">
+              {dataPokemon?.weight}Kg
+            </SubTitle>
           </div>
 
           <article className="text-center py-8 space-y-4">
@@ -87,7 +90,9 @@ const ModalCard = ({ className }) => {
             </div>
 
             <div>
-              <SubTitle className="text-2xl xl:text-3xl">{name}</SubTitle>
+              <SubTitle className="text-2xl xl:text-3xl text-green-900/90">
+                {name}
+              </SubTitle>
               <div className="flex justify-center gap-3">
                 <Paragraf>{typeOne}</Paragraf>
                 {slash >= 2 && <span>/</span>}
@@ -111,8 +116,9 @@ const ModalCard = ({ className }) => {
           </article>
 
           <div
-            className="bg-white rounded-full h-16 w-16 absolute -left-3
-            -top-5 shadow-md flex items-center justify-center p-4"
+            className="bg-white rounded-full h-14 w-14 sm:h-16 sm:w-16  
+            absolute -left-3 -top-5 shadow-md flex items-center 
+            justify-center p-4"
           >
             <Paragraf className="text-base font-semibold tracking-wide">
               {dataPokemon?.height}m
@@ -121,7 +127,8 @@ const ModalCard = ({ className }) => {
         </div>
         <Button
           onClick={() => setIsOpen(false)}
-          className="absolute -right-4 -top-4 rounded-full bg-white 
+          className="absolute -top-6 right-1/2 translate-x-1/2
+          sm:-top-4 sm:right-3 rounded-full bg-white
           w-12 h-12 flex justify-center items-center shadow-md"
         >
           <Close
@@ -142,15 +149,22 @@ const ModalCard = ({ className }) => {
                 key={idx}
                 className="grid grid-cols-6 items-center my-3 gap-4 sm:gap-0"
               >
-                <SubTitle className="col-span-2 text-left sm:text-right justify-items-end ">
+                <SubTitle
+                  className="col-span-2 text-left sm:text-right 
+                  justify-items-end text-black/50"
+                >
                   {poke.agility}
                 </SubTitle>
-                <Paragraf className="col-span-1 text-left sm:text-center">
+                <Paragraf
+                  className="col-span-1 text-left sm:text-center
+                  text-black/60 font-medium
+                "
+                >
                   {poke.value}
                 </Paragraf>
                 <div
-                  className="bg-black w-full h-4 rounded-md overflow-hidden
-                  col-span-3"
+                  className="bg-black/20 shadow-inner w-full h-3 md:h-4 rounded-md
+                  overflow-hidden col-span-3"
                 >
                   <div
                     style={{
@@ -160,7 +174,7 @@ const ModalCard = ({ className }) => {
                           : poke.value.toString() + "px"
                       }`,
                     }}
-                    className={`bg-red-600 h-4`}
+                    className={`bg-red-600 h-3 md:h-4`}
                   ></div>
                 </div>
               </div>

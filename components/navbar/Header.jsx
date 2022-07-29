@@ -16,7 +16,7 @@ const Header = ({ children }) => {
         </div>
 
         <div className="flex items-center gap-5">
-          <label className="relative block">
+          <label className="relative hidden lg:block">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <Search className="h-5 w-5" />
             </span>

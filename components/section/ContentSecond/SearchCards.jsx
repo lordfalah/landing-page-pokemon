@@ -1,17 +1,25 @@
 import React, { useContext } from "react";
 import Search from "../../../icon/Search";
+import SearchBold from "../../../icon/SearchBold";
 import { StateContext } from "../../../pages";
 
-const SearchCards = () => {
+const SearchCards = ({ className }) => {
+  const addClass = className ? className : "";
   const { searchPokemon, setSearchPokemon } = useContext(StateContext);
 
   return (
-    <label className="relative block w-1/2 overflow-hidden">
+    <label
+      className={`relative block w-3/4 md:w-1/2 overflow-hidden ${addClass}`}
+    >
       <button
-        className="bg-red-400 absolute inset-y-0 right-0 flex 
+        className="bg- absolute inset-y-0 right-0 flex bg-green-500/70
         items-center p-3 overflow-hidden rounded-tr-md rounded-br-md"
       >
-        <Search className="h-5 w-5" />
+        {/* <Search className="h-5 w-5 stroke-white stroke-2" /> */}
+        <SearchBold
+          className="h-5 w-5 stroke-white fill-white 
+          stroke-1 "
+        />
       </button>
 
       <input
