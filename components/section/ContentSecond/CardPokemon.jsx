@@ -19,7 +19,7 @@ const CardPokemon = ({ pokemon }) => {
       className="bg-white relative rounded-md p-8 shadow-lg"
       key={pokemon.name}
     >
-      <div className="absolute left-0 right-0 -top-20 w-1/2 mx-auto">
+      <div className={`absolute left-0 right-0 -top-20 mx-auto w-2/5 sm:w-1/2`}>
         <Image
           src={pokemon?.sprites?.other?.dream_world?.front_default}
           alt={pokemon?.name}
@@ -30,7 +30,10 @@ const CardPokemon = ({ pokemon }) => {
         />
       </div>
 
-      <div className="flex flex-col gap-6 items-center mt-20">
+      <div
+        className="flex flex-col gap-6 items-center mt-24 
+        sm:mt-20 md:mt-28 lg:mt-24 xl:mt-20 2xl:mt-28"
+      >
         <h2 className="text-xl">{name}</h2>
         <span
           className="block w-4/5 h-3 rounded-full

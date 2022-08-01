@@ -49,9 +49,9 @@ const ModalCard = ({ className }) => {
     >
       <Container
         style={{
-          boxShadow: "0px 0px 40px 0px rgba(0,0,0,0.25) inset",
-          WebkitBoxShadow: "0px 0px 40px 0px rgba(0,0,0,0.25) inset",
-          MozBoxShadow: "0px 0px 40px 0px rgba(0,0,0,0.25) inset",
+          boxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
+          WebkitBoxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
+          MozBoxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
         }}
         className={`relative z-50 bg-white/80 left-0 w-11/12
         right-0 top-1/2 -translate-y-1/2 rounded-lg py-10
@@ -174,7 +174,13 @@ const ModalCard = ({ className }) => {
                           : poke.value.toString() + "px"
                       }`,
                     }}
-                    className={`bg-red-600 h-3 md:h-4`}
+                    className={`${
+                      idx === 0 || idx === 4
+                        ? "bg-yellow-500"
+                        : idx === 1 || idx === 3
+                        ? "bg-orange-500/80"
+                        : idx === 2 && "bg-green-600"
+                    } h-3 md:h-4`}
                   ></div>
                 </div>
               </div>

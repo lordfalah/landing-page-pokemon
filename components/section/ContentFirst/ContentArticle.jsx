@@ -7,7 +7,9 @@ const ContentArticle = ({ className }) => {
   const addClass = className ? className : "";
   return (
     <article className={`${addClass}`}>
-      <Text className="text-black font-bold">Gotta Catch Em All!</Text>
+      <Text className="text-black font-bold sm:text-5xl xl:text-6xl">
+        Gotta Catch Em All!
+      </Text>
       <Paragraf>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci quos
         sed fugiat impedit repudiandae et placeat expedita veritatis quam
