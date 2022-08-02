@@ -67,12 +67,12 @@ export default function Home() {
           }}
         >
           <div
-            className="absolute bottom-4 flex justify-between items-center 
-            w-full px-10"
+            className="absolute bottom-4 lg:bottom-0
+            flex justify-between items-center w-full px-10"
           >
             <div
               className="w-[120px] h-[50px] sm:w-40 sm:h-[55px] lg:w-52 
-              lg:h-24 xl:w-64 xl:h-28 overflow-hidden"
+              lg:h-24 xl:w-64 xl:h-28 overflow-hidden hidden md:block"
             >
               <Image
                 src="/img/dotGrid2.png"
@@ -88,7 +88,7 @@ export default function Home() {
         </div>
 
         <div
-          className="z-20 fixed flex justify-center gap-4 h-fit
+          className="z-50 fixed flex justify-center gap-4 h-fit
           items-center bottom-0 top-0 my-auto mx-0 right-12 flex-col"
         >
           {[1, 2, 3].map((data) => (
@@ -110,7 +110,7 @@ export default function Home() {
           <Container className="px-5 sm:px-0 relative z-20">
             <div
               className="block lg:grid lg:grid-cols-2 items-center 
-              relative mt-10 md:mt-16 lg:mt-24 xl:mt-40"
+              relative mt-5 md:mt-12 lg:mt-24 xl:mt-40"
             >
               <ContentArticle className="space-y-5 w-full" />
               <ContentImg
@@ -119,7 +119,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex w-full lg:w-5/12 gap-8 mt-28">
+            <div className="flex w-full lg:w-5/12 gap-8 mt-20">
               <ImgShow source="1.png" className="w-1/2" />
               <ImgShow source="3.png" className="w-1/2" />
             </div>

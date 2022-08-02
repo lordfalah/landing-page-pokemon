@@ -2,22 +2,25 @@ import React from "react";
 import Search from "../../icon/Search";
 import Container from "../Content/Container";
 import { TbGridDots } from "react-icons/tb";
+import Image from "next/image";
 
 const Header = ({ children }) => {
   return (
-    <Container>
+    <Container className="relative z-10">
       <nav className="px-5 sm:px-0 flex justify-between">
         <div>
-          <img
+          <Image
             src="/img/pokemon.png"
             alt="pokemon text"
             width="200px"
-            height="200px"
+            height="100px"
+            layout="intrinsic"
+            objectFit="contain"
           />
         </div>
 
-        <div className="flex items-center relative">
-          <label className="hidden md:block">
+        <div className="flex items-center">
+          <label className="hidden md:block relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <Search className="h-5 w-5" />
             </span>

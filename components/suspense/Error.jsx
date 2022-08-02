@@ -5,7 +5,7 @@ import SubTitle from "../text/SubTitle";
 const ErrorCustom = ({ error }) => {
   return (
     <div className="mx-auto">
-      <article className="text-center space-y-2">
+      <article className="text-center space-y-2 mt-20">
         <h1
           className="font-bold text-9xl tracking-widest 
             bg-clip-text text-transparent bg-gradient-to-tr from-white 
