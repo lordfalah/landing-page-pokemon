@@ -9,6 +9,8 @@ import Close from "../../../icon/Close";
 import resizeWindow from "../../../hooks/rezizeWindow";
 import Container from "../../Content/Container";
 
+import { motion } from "framer-motion";
+
 const ModalCard = ({ className }) => {
   const { width } = resizeWindow();
   const logic = width >= 640 ? 50 : 10;
@@ -42,21 +44,58 @@ const ModalCard = ({ className }) => {
 
   const ability = dataPokemon?.abilities[0]?.ability?.name.toUpperCase();
 
+  const parentModal = {
+    show: {
+      y: 0,
+      transition: {
+        ease: "linear",
+        when: "beforeChildren",
+        delayChildren: 0.3,
+      },
+    },
+    hidden: {
+      y: "-100%",
+    },
+
+    out: { x: "-100%" },
+  };
+
+  const childModal = {
+    show: {
+      opacity: 1,
+      y: "-50%",
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        duration: 2,
+      },
+    },
+    hidden: { opacity: 0, x: "100%" },
+
+    out: { y: "100%" },
+  };
+
   return (
-    <div
+    <motion.div
+      variants={parentModal}
+      key="Modal"
+      initial="hidden"
+      animate="show"
+      exit="out"
       className={`fixed top-0 bottom-0 left-0 right-0 z-30 
-      bg-black/50 transition duration-300 ease-in-out ${addClass}`}
+      bg-black/50 ${addClass}`}
     >
-      <Container
+      <motion.div
+        variants={childModal}
         style={{
           boxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
           WebkitBoxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
-          MozBoxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
         }}
         className={`relative z-50 bg-white/80 left-0 w-11/12
         right-0 top-1/2 -translate-y-1/2 rounded-lg py-10
         lg:py-12 lg:px-10 xl:px-20 gap-10 lg:gap-14 shadow-slate-600/50 
-        grid grid-cols-1 lg:grid-cols-2 items-center`}
+        grid grid-cols-1 lg:grid-cols-2 items-center container mx-auto`}
       >
         <div
           className="bg-white/80 w-4/5 sm:w-2/3 md:w-1/2 lg:w-full rounded-xl 
@@ -106,7 +145,9 @@ const ModalCard = ({ className }) => {
                 <GoPrimitiveDot size="15px" className="text-slate-500/75" />
                 <SubTitle
                   className="text-lg"
-                  style={{ color: `${color === "" ? "rgb(0, 0, 0)" : color}` }}
+                  style={{
+                    color: `${color === "" ? "rgb(0, 0, 0)" : color}`,
+                  }}
                 >
                   {ability}
                 </SubTitle>
@@ -187,8 +228,8 @@ const ModalCard = ({ className }) => {
             );
           })}
         </div>
-      </Container>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

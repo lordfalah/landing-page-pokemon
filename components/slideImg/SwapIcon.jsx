@@ -12,7 +12,7 @@ const SwapIcon = ({ className }) => {
 
   return (
     <Fragment>
-      <div className="flex gap-3">
+      <div className="flex gap-3 justify-evenly w-full sm:w-fit">
         {icons.map((icon, idx) => {
           return (
             <div

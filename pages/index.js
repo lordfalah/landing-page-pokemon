@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Container from "../components/Content/Container";
 import Header from "../components/navbar/Header";
@@ -14,6 +13,9 @@ import Paragraf from "../components/text/Paragraf";
 import useScrollTop from "../hooks/useScrollTop";
 import ArrowLeft from "../icon/ArrowLeft";
 import ArrowRight from "../icon/ArrowRight";
+
+import { AnimatePresence } from "framer-motion";
+import GridImg from "../components/slideImg/GridImg";
 
 export const StateContext = React.createContext();
 export const ThemeContext = React.createContext();
@@ -44,7 +46,9 @@ export default function Home() {
         <DataContext.Provider
           value={{ dataPokemon: dataPokemon, color: color }}
         >
-          {isOpen && <ModalCard />}
+          <AnimatePresence exitBeforeEnter={true}>
+            {isOpen && <ModalCard />}
+          </AnimatePresence>
         </DataContext.Provider>
       </ThemeCards.Provider>
 
@@ -59,30 +63,23 @@ export default function Home() {
         </Head>
 
         <div
-          className="bg-green-500/80 w-[55%] h-screen absolute top-0 
-          right-0 before:-z-20"
+          className="bg-green-500/80 w-3/4 md:w-[55%] h-screen 
+          absolute top-0 right-0 before:-z-20"
           style={{
             clipPath: "polygon(20% 0%, 100% 0, 100% 100%, 0% 100%)",
             WebkitClipPath: "polygon(20% 0%, 100% 0, 100% 100%, 0% 100%)",
           }}
         >
+          <GridImg className="w-24 h-12 absolute bottom-40 right-0 block sm:hidden" />
+
           <div
-            className="absolute bottom-4 lg:bottom-0
+            className="absolute bottom-4 lg:bottom-4 xl:bottom-0
             flex justify-between items-center w-full px-10"
           >
-            <div
+            <GridImg
               className="w-[120px] h-[50px] sm:w-40 sm:h-[55px] lg:w-52 
-              lg:h-24 xl:w-64 xl:h-28 overflow-hidden hidden md:block"
-            >
-              <Image
-                src="/img/dotGrid2.png"
-                width="100%"
-                height="100%"
-                layout="responsive"
-                priority
-                alt="dot grid"
-              />
-            </div>
+              lg:h-20 xl:w-64 xl:h-28 overflow-hidden hidden md:block"
+            />
             <SwapIcon className="flex justify-center items-center" />
           </div>
         </div>
@@ -102,42 +99,46 @@ export default function Home() {
           ))}
         </div>
 
-        <header className="py-10">
+        <header className="py-4">
           <Header />
         </header>
 
-        <section>
-          <Container className="px-5 sm:px-0 relative z-20">
+        <section className="h-screen">
+          <Container
+            className="px-5 sm:px-0 relative z-20
+            mt-16 md:mt-20 lg:mt-24 xl:mt-32"
+          >
             <div
               className="block lg:grid lg:grid-cols-2 items-center 
-              relative mt-5 md:mt-12 lg:mt-24 xl:mt-40"
+              relative"
             >
-              <ContentArticle className="space-y-5 w-full" />
+              <ContentArticle className="space-y-8 w-full" />
               <ContentImg
-                className="w-1/2 absolute right-0 top-1/2 mt-20 
-                -translate-y-1/2 hidden lg:block"
+                className="w-1/2 absolute right-0 top-1/2 lg:mt-10 xl:mt-16 
+                2xl:mt-24 -translate-y-1/2 hidden lg:block"
               />
             </div>
 
-            <div className="flex w-full lg:w-5/12 gap-8 mt-20">
-              <ImgShow source="1.png" className="w-1/2" />
-              <ImgShow source="3.png" className="w-1/2" />
+            <div
+              className="hidden sm:block w-4/5 mx-auto md:flex lg:mx-0 
+              sm:w-3/4 lg:w-5/12 gap-8 mt-20 xl:mt-16"
+            >
+              <ImgShow source="1.png" className="w-full" />
+              <ImgShow source="3.png" className="w-full hidden md:block" />
             </div>
 
             <div
-              className="flex items-center mt-5 justify-center 
-              lg:justify-start"
+              className="w-fit lg:w-5/12 lg:mx-0 mx-auto justify-center 
+              gap-4 hidden sm:flex mt-7"
             >
-              <div className="w-5/12 flex justify-center gap-4">
-                <ArrowLeft className="h-6 w-6" />
-                <p className="text-xl font-semibold">1 of 3</p>
-                <ArrowRight className="h-6 w-6" />
-              </div>
+              <ArrowLeft className="h-6 w-6" />
+              <p className="text-xl font-semibold">1 of 3</p>
+              <ArrowRight className="h-6 w-6" />
             </div>
           </Container>
         </section>
 
-        <section ref={numberSectionOne} className="bg-slate-700/20 mt-72">
+        <section ref={numberSectionOne} className="bg-slate-700/20">
           <Container className="px-5 sm:px-0 py-10">
             <StateContext.Provider
               value={{
