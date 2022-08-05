@@ -7,7 +7,6 @@ import SubTitle from "../../text/SubTitle";
 import Image from "next/image";
 import Close from "../../../icon/Close";
 import resizeWindow from "../../../hooks/rezizeWindow";
-import Container from "../../Content/Container";
 
 import { motion } from "framer-motion";
 
@@ -93,7 +92,7 @@ const ModalCard = ({ className }) => {
           WebkitBoxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
         }}
         className={`relative z-50 bg-white/80 left-0 w-11/12
-        right-0 top-1/2 -translate-y-1/2 rounded-lg py-10
+        right-0 top-1/2 -translate-y-1/2 rounded-lg pt-8 pb-6 sm:py-10
         lg:py-12 lg:px-10 xl:px-20 gap-10 lg:gap-14 shadow-slate-600/50 
         grid grid-cols-1 lg:grid-cols-2 items-center container mx-auto`}
       >
@@ -111,7 +110,7 @@ const ModalCard = ({ className }) => {
             </SubTitle>
           </div>
 
-          <article className="text-center py-8 space-y-4">
+          <article className="text-center py-5 sm:py-8 space-y-4">
             <div className="mx-auto w-2/6 xl:w-1/4">
               <Image
                 src={`${

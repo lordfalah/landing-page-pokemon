@@ -10,7 +10,7 @@ const ContentArticle = ({ className }) => {
       <Text className="text-black font-bold sm:text-5xl xl:text-6xl">
         Gotta Catch Em All!
       </Text>
-      <Paragraf>
+      <Paragraf className="w-full sm:w-4/5">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci quos
         sed fugiat impedit repudiandae et placeat expedita veritatis quam
         explicabo?

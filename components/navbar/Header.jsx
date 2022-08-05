@@ -8,16 +8,14 @@ const Header = ({ children }) => {
   return (
     <Container className="relative z-10">
       <nav className="px-5 sm:px-0 flex justify-between">
-        <div>
-          <Image
-            src="/img/pokemon.png"
-            alt="pokemon text"
-            width="200px"
-            height="100px"
-            layout="intrinsic"
-            objectFit="contain"
-          />
-        </div>
+        <Image
+          src="/img/pokemon.png"
+          alt="pokemon text"
+          width="200px"
+          height="100px"
+          layout="intrinsic"
+          objectFit="contain"
+        />
 
         <div className="flex items-center">
           <label className="hidden md:block relative">
