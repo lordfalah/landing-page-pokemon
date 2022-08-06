@@ -13,50 +13,20 @@ import ContentImg from "../components/section/ContentFirst/ContentImg";
 import ContentCard from "../components/section/ContentSecond/ContentCard";
 import ModalCard from "../components/section/ContentSecond/ModalCard";
 import SearchCards from "../components/section/ContentSecond/SearchCards";
-import ImgShow from "../components/slideImg/ImgShow";
 import SwapIcon from "../components/slideImg/SwapIcon";
 import Paragraf from "../components/text/Paragraf";
 import useScrollTop from "../hooks/useScrollTop";
 import ArrowLeft from "../icon/ArrowLeft";
 import ArrowRight from "../icon/ArrowRight";
-
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import GridImg from "../components/slideImg/GridImg";
+import DoubleUp from "../icon/DoubleUp";
+import SlideImages from "../components/slideImg/SlideImages";
 
 export const StateContext = React.createContext();
 export const ThemeContext = React.createContext();
 export const ThemeCards = React.createContext();
 export const DataContext = React.createContext();
-
-const containerSvg = {
-  show: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.5,
-      when: "beforeChildren",
-    },
-  },
-
-  hidden: {
-    opacity: 0,
-  },
-};
-
-const itemPath = {
-  show: {
-    rotate: 0,
-    pathLength: 1,
-    transition: {
-      duration: 1,
-      ease: "easeIn",
-    },
-  },
-
-  hidden: {
-    rotate: 180,
-    pathLength: 0,
-  },
-};
 
 export default function Home() {
   const [searchPokemon, setSearchPokemon] = useState("");
@@ -82,7 +52,7 @@ export default function Home() {
         <DataContext.Provider
           value={{ dataPokemon: dataPokemon, color: color }}
         >
-          <AnimatePresence exitBeforeEnter={true}>
+          <AnimatePresence exitBeforeEnter>
             {isOpen && <ModalCard />}
           </AnimatePresence>
         </DataContext.Provider>
@@ -141,12 +111,8 @@ export default function Home() {
               />
             </div>
 
-            <div
-              className="hidden sm:block w-4/5 mx-auto md:flex lg:mx-0 
-              sm:w-3/4 lg:w-5/12 gap-8 mt-20 xl:mt-16"
-            >
-              <ImgShow source="1.png" className="w-full" />
-              <ImgShow source="3.png" className="w-full hidden md:block" />
+            <div>
+              <SlideImages className="flex" />
             </div>
 
             <div
@@ -166,31 +132,18 @@ export default function Home() {
               href="#home"
               className={`bg-black/50 rounded-full cursor-pointer z-20
               w-11 h-11 fixed bottom-10 right-5 flex justify-center items-center
-              transition duration-200 delay-200 ease-in-out
+              transition duration-200 delay-200 ease-in-out group 
+              hover:bg-gradient-to-t hover:from-transparent hover:to-black/90
               ${
                 top >= numberOf
                   ? "scale-100 translate-y-0"
                   : "scale-0 translate-y-full"
               }`}
             >
-              <motion.svg
-                variants={containerSvg}
-                initial="hidden"
-                animate="show"
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <motion.path
-                  variants={itemPath}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 11l7-7 7 7M5 19l7-7 7 7"
-                />
-              </motion.svg>
+              <DoubleUp
+                className="w-7 h-7 stroke-1 group-hover:stroke-2
+                group-hover:stroke-white transition duration-150 ease-linear"
+              />
             </a>
 
             <StateContext.Provider

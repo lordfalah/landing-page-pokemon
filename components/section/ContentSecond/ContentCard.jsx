@@ -40,14 +40,14 @@ const ContentCard = () => {
 
   return (
     <Fragment>
-      {isFetching && (
-        <ImSpinner9 size="40px" className="animate-spin text-cyan-600" />
-      )}
-
-      {isLoading && <div className="text-2xl font-semibold">Loading...</div>}
+      <div className="flex justify-between my-8">
+        {isLoading && <div className="text-2xl font-semibold">Loading...</div>}
+        {isFetching && (
+          <ImSpinner9 size="40px" className="animate-spin text-cyan-600" />
+        )}
+      </div>
 
       {isError && <ErrorCustom error={error} />}
-
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
         xl:grid-cols-4 gap-x-7 gap-y-28 mt-40"
