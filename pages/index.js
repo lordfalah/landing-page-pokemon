@@ -27,6 +27,7 @@ export const StateContext = React.createContext();
 export const ThemeContext = React.createContext();
 export const ThemeCards = React.createContext();
 export const DataContext = React.createContext();
+export const ThemeToggle = React.createContext();
 
 export default function Home() {
   const [searchPokemon, setSearchPokemon] = useState("");
@@ -34,6 +35,7 @@ export default function Home() {
   const [dataPokemon, setDataPokemon] = useState({});
   const [color, setColor] = useState("");
   const [numberOf, setNumberOf] = useState(0);
+  const [toggle, setToggle] = useState(false);
   const numberSectionOne = useRef();
   const { top } = useScrollTop();
 
@@ -48,6 +50,13 @@ export default function Home() {
 
   return (
     <Fragment>
+      <div
+        className={`fixed top-0 bottom-0 left-0 right-0 z-30 
+        bg-black/50 ${toggle ? "scale-100" : "scale-0"}`}
+      >
+        <SlideImages className="flex absolute bottom-1/2 translate-y-1/2" />
+      </div>
+
       <ThemeCards.Provider value={{ isOpen: isOpen, setIsOpen: setIsOpen }}>
         <DataContext.Provider
           value={{ dataPokemon: dataPokemon, color: color }}
@@ -92,7 +101,9 @@ export default function Home() {
         </div>
 
         <header className="py-4">
-          <Header />
+          <ThemeToggle.Provider value={setToggle}>
+            <Header />
+          </ThemeToggle.Provider>
         </header>
 
         <section className="h-screen">
@@ -111,9 +122,7 @@ export default function Home() {
               />
             </div>
 
-            <div>
-              <SlideImages className="flex" />
-            </div>
+            <SlideImages className="hidden sm:flex mt-20 xl:mt-16" />
 
             <div
               className="w-fit lg:w-5/12 lg:mx-0 mx-auto justify-center 

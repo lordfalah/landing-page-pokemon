@@ -2,6 +2,44 @@ import Image from "next/image";
 import React from "react";
 import Paragraf from "../../text/Paragraf";
 import DetailsCard from "./DetailsCard";
+import { motion } from "framer-motion";
+
+const container = {
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.9,
+      type: "spring",
+      damping: 15,
+      delayChildren: 0.1,
+      staggerChildren: 0.5,
+    },
+  },
+
+  hidden: {
+    opacity: 0,
+  },
+
+  out: {
+    opacity: 0,
+  },
+};
+
+const items = {
+  show: {
+    y: 0,
+    transition: {
+      ease: "linear",
+      duration: 0.5,
+    },
+  },
+
+  hidden: {
+    y: "-40%",
+  },
+
+  out: { y: "-40%" },
+};
 
 const CardPokemon = ({ pokemon }) => {
   const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
@@ -15,11 +53,18 @@ const CardPokemon = ({ pokemon }) => {
     .reduce((acc, arr) => acc + arr);
 
   return (
-    <div
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit="out"
       className="bg-white relative rounded-md p-8 shadow-lg"
       key={pokemon.name}
     >
-      <div className={`absolute left-0 right-0 -top-20 mx-auto w-2/5 sm:w-1/2`}>
+      <motion.div
+        variants={items}
+        className={`absolute left-0 right-0 -top-20 mx-auto w-2/5 sm:w-1/2`}
+      >
         <Image
           src={pokemon?.sprites?.other?.dream_world?.front_default}
           alt={pokemon?.name}
@@ -29,7 +74,7 @@ const CardPokemon = ({ pokemon }) => {
           placeholder={pokemon?.name}
           priority
         />
-      </div>
+      </motion.div>
 
       <div
         className="flex flex-col gap-6 items-center mt-24 
@@ -101,7 +146,7 @@ const CardPokemon = ({ pokemon }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

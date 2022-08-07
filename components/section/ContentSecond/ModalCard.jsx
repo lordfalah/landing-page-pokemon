@@ -49,7 +49,9 @@ const ModalCard = ({ className }) => {
       transition: {
         ease: "linear",
         when: "beforeChildren",
-        delayChildren: 0.3,
+        delayChildren: 0.2,
+        type: "spring",
+        stiffness: 300,
       },
     },
     hidden: {

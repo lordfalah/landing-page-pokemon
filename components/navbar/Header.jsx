@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Search from "../../icon/Search";
 import Container from "../Content/Container";
 import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
+import { ThemeToggle } from "../../pages";
 
 const Header = ({ children }) => {
+  const setToggle = useContext(ThemeToggle);
+
   return (
-    <Container className="relative z-10">
+    <Container className="relative z-50">
       <nav className="px-5 sm:px-0 flex justify-between">
         <Image
           src="/img/pokemon.png"
@@ -34,7 +37,11 @@ const Header = ({ children }) => {
             />
           </label>
 
-          <TbGridDots size="35px" className="text-white cursor-pointer" />
+          <TbGridDots
+            size="35px"
+            className="text-white cursor-pointer"
+            onClick={() => setToggle((prev) => !prev)}
+          />
         </div>
       </nav>
     </Container>

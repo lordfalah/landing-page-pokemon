@@ -6,7 +6,7 @@ const ImgShow = ({ source, className }) => {
     <div className={`group ${addClass}`}>
       <div
         className="group-hover:scale-125 bg-cover bg-no-repeat h-52
-        transition duration-200 ease-in-out bg-center rounded-3xl"
+        transition duration-200 ease-in-out bg-center rounded-3xl overflow-hidden"
         style={{
           backgroundImage: `url("/img/${source}")`,
         }}

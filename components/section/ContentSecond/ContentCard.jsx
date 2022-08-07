@@ -5,6 +5,7 @@ import { StateContext } from "../../../pages";
 import CardPokemon from "./CardPokemon";
 import { ImSpinner9 } from "react-icons/im";
 import ErrorCustom from "../../suspense/Error";
+import { AnimatePresence } from "framer-motion";
 
 const ContentCard = () => {
   const { searchPokemon } = useContext(StateContext);
@@ -52,15 +53,19 @@ const ContentCard = () => {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
         xl:grid-cols-4 gap-x-7 gap-y-28 mt-40"
       >
-        {isSuccess &&
-          searchPokemon.length === 0 &&
-          data?.map((pokemon) => {
-            return <CardPokemon key={pokemon.id} pokemon={pokemon} />;
-          })}
+        <AnimatePresence>
+          {isSuccess &&
+            searchPokemon.length === 0 &&
+            data?.map((pokemon) => {
+              return <CardPokemon key={pokemon.id} pokemon={pokemon} />;
+            })}
+        </AnimatePresence>
 
-        {isSuccess && searchPokemon.length !== 0 && (
-          <CardPokemon pokemon={data} />
-        )}
+        <AnimatePresence>
+          {isSuccess && searchPokemon.length !== 0 && (
+            <CardPokemon pokemon={data} />
+          )}
+        </AnimatePresence>
       </div>
     </Fragment>
   );
