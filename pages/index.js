@@ -35,28 +35,21 @@ export default function Home() {
   const [dataPokemon, setDataPokemon] = useState({});
   const [color, setColor] = useState("");
   const [numberOf, setNumberOf] = useState(0);
-  const [toggle, setToggle] = useState(false);
   const numberSectionOne = useRef();
   const { top } = useScrollTop();
 
   useEffect(() => {
     const value = numberSectionOne.current.offsetTop;
+
     setNumberOf(value);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     document.querySelector("html").classList.add("scroll-smooth");
   }, []);
 
   return (
     <Fragment>
-      <div
-        className={`fixed top-0 bottom-0 left-0 right-0 z-30 
-        bg-black/50 ${toggle ? "scale-100" : "scale-0"}`}
-      >
-        <SlideImages className="flex absolute bottom-1/2 translate-y-1/2" />
-      </div>
-
       <ThemeCards.Provider value={{ isOpen: isOpen, setIsOpen: setIsOpen }}>
         <DataContext.Provider
           value={{ dataPokemon: dataPokemon, color: color }}
@@ -75,7 +68,11 @@ export default function Home() {
         <Head>
           <title>Pokemon</title>
           <meta name="description" content="catch pokemon" />
-          <link rel="icon" href="/favicon.ico" />
+          <link
+            rel="icon"
+            href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAC4uLgAz8/PAAAAAAD///8A29vbAAAA/wCmpqYA6+vrAAAAhwAAAOMAkZGRAAAA1AAAAL0AAACmAAAAAAAAAAAAIiIiIiIiIiIiIiN0EGIiIiIjMzdBBqIiIjMzM3QQaiIiMzMzN0EGIiMzMyIidBBiIzMyIiInQQIiIiIiIiIiIiIiIiIiIiIiJVVSIiIlm9IlVVUiIlm8giJVVVVVm80iIlVVVVm82CIiJVVVm82CIiIiJVm80iIiIiIiIiIiIiL4HwAA4AcAAMADAACAAQAAgAEAAAAAAAADwAAAAkAAAAJAAAADwAAAAAAAAIABAACAAQAAwAMAAOAHAAD4HwAA"
+            type="image/x-icon"
+          />
         </Head>
 
         <div
@@ -101,9 +98,7 @@ export default function Home() {
         </div>
 
         <header className="py-4">
-          <ThemeToggle.Provider value={setToggle}>
-            <Header />
-          </ThemeToggle.Provider>
+          <Header />
         </header>
 
         <section className="h-screen">
@@ -122,7 +117,7 @@ export default function Home() {
               />
             </div>
 
-            <SlideImages className="hidden sm:flex mt-20 xl:mt-16" />
+            <SlideImages className="hidden sm:flex mt-20 2xl:mt-24" />
 
             <div
               className="w-fit lg:w-5/12 lg:mx-0 mx-auto justify-center 
@@ -135,7 +130,11 @@ export default function Home() {
           </Container>
         </section>
 
-        <section ref={numberSectionOne} className="bg-slate-700/20">
+        <section
+          id="cardPokemon"
+          ref={numberSectionOne}
+          className="bg-slate-700/20"
+        >
           <Container className="px-5 sm:px-0 py-10">
             <a
               href="#home"

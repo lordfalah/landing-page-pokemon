@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../../button/Button";
 import Paragraf from "../../text/Paragraf";
 import Text from "../../text/Text";
 
@@ -16,9 +15,13 @@ const ContentArticle = ({ className }) => {
         explicabo?
       </Paragraf>
 
-      <Button className="bg-black text-white px-6 py-3">
+      <a
+        href="#cardPokemon"
+        className="bg-black text-white px-6 py-3 transition duration-150 
+        ease-linear hover:shadow-xl shadow-slate-600 rounded-full inline-block"
+      >
         More Information
-      </Button>
+      </a>
     </article>
   );
 };

@@ -7,7 +7,6 @@ import SubTitle from "../../text/SubTitle";
 import Image from "next/image";
 import Close from "../../../icon/Close";
 import resizeWindow from "../../../hooks/rezizeWindow";
-
 import { motion } from "framer-motion";
 
 const ModalCard = ({ className }) => {
@@ -49,7 +48,7 @@ const ModalCard = ({ className }) => {
       transition: {
         ease: "linear",
         when: "beforeChildren",
-        delayChildren: 0.2,
+        delayChildren: 0.1,
         type: "spring",
         stiffness: 300,
       },
@@ -142,7 +141,7 @@ const ModalCard = ({ className }) => {
 
             <div className="">
               <div className="flex justify-center items-center gap-2">
-                <SubTitle className="text-lg text-red-800">Fighting </SubTitle>
+                <SubTitle className="text-lg text-red-800">Fighting</SubTitle>
                 <GoPrimitiveDot size="15px" className="text-slate-500/75" />
                 <SubTitle
                   className="text-lg"

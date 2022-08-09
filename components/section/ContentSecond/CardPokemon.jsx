@@ -11,8 +11,8 @@ const container = {
       duration: 0.9,
       type: "spring",
       damping: 15,
-      delayChildren: 0.1,
-      staggerChildren: 0.5,
+      delayChildren: 0.5,
+      staggerChildren: 1,
     },
   },
 

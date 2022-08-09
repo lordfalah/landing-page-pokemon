@@ -1,6 +1,6 @@
 import React from "react";
 
-const DoubleUp = ({ className }) => {
+const DoubleUp = ({ className, children }) => {
   const addClass = className ? className : "";
 
   return (
