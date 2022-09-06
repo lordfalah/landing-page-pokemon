@@ -7,8 +7,8 @@ const ContentImg = ({ className }) => {
 	return (
 		<div className={`${addClass}`}>
 			<Image
-				src="/img/PikPng.com_pokemon-go-characters-png_4973553.png"
-				alt="DUCK"
+				src="/img/charizard.png"
+				alt="Lizard"
 				width="100%"
 				height="100%"
 				layout="responsive"
