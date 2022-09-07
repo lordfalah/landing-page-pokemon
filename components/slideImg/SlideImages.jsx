@@ -1,41 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import images from "../../components/images/ImageCards";
 import ImgShow from "./ImgShow";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const SlideImages = ({ className }) => {
-  const addClass = className ? className : "";
-  const [number, setNumber] = useState(0);
-  const container = useRef(null);
+	const addClass = className ? className : "";
+	const { ref: parent, entry } = useInView();
 
-  useEffect(() => {
-    const scrollWidth = container.current.scrollWidth;
-    const offsetWidth = container.current.offsetWidth;
-    setNumber(scrollWidth - offsetWidth);
-  }, []);
-
-  return (
-    <div ref={container} className="overflow-hidden sm:w-full lg:w-[43%]">
-      <motion.div
-        drag="x"
-        dragConstraints={{ right: 0, left: -number }}
-        whileHover={{ cursor: "grab" }}
-        whileTap={{ cursor: "grabbing" }}
-        className={`${addClass} mx-auto lg:mx-0 w-full
+	return (
+		<div ref={parent} className="overflow-hidden sm:w-full lg:w-[43%]">
+			<motion.div
+				drag="x"
+				dragConstraints={{ right: 0, left: -entry?.boundingClientRect?.width }}
+				whileHover={{ cursor: "grab" }}
+				whileTap={{ cursor: "grabbing" }}
+				className={`${addClass} mx-auto lg:mx-0 w-full
         gap-8 `}
-      >
-        {images.map((img, idx) => {
-          return (
-            <ImgShow
-              source={img.source}
-              className="min-w-[15rem] overflow-hidden"
-              key={idx}
-            />
-          );
-        })}
-      </motion.div>
-    </div>
-  );
+			>
+				{images.map((img, idx) => {
+					return (
+						<ImgShow
+							source={img.source}
+							className="min-w-[15rem] overflow-hidden"
+							key={idx}
+						/>
+					);
+				})}
+			</motion.div>
+		</div>
+	);
 };
 
 export default SlideImages;

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Container from "../components/Content/Container";
 import Header from "../components/navbar/Header";
 import ContentArticle from "../components/section/ContentFirst/ContentArticle";
@@ -9,7 +9,6 @@ import ModalCard from "../components/section/ContentSecond/ModalCard";
 import SearchCards from "../components/section/ContentSecond/SearchCards";
 import SwapIcon from "../components/slideImg/SwapIcon";
 import Paragraf from "../components/text/Paragraf";
-import useScrollTop from "../hooks/useScrollTop";
 import ArrowLeft from "../icon/ArrowLeft";
 import ArrowRight from "../icon/ArrowRight";
 import { AnimatePresence } from "framer-motion";
@@ -17,6 +16,7 @@ import GridImg from "../components/slideImg/GridImg";
 import DoubleUp from "../icon/DoubleUp";
 import SlideImages from "../components/slideImg/SlideImages";
 import Link from "next/link";
+import { useInView } from "react-intersection-observer";
 
 export const StateContext = React.createContext();
 export const ThemeContext = React.createContext();
@@ -29,21 +29,14 @@ export default function Home() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [dataPokemon, setDataPokemon] = useState({});
 	const [color, setColor] = useState("");
-	const [numberOf, setNumberOf] = useState(0);
-	const numberSectionOne = useRef();
-	const { top } = useScrollTop();
-
-	useEffect(() => {
-		const value = numberSectionOne.current.offsetTop;
-
-		setNumberOf(value);
-	}, []);
 
 	useEffect(() => {
 		const html = document.querySelector("html");
 		html.classList.add("scroll-smooth");
 		html.setAttribute("id", "home");
 	}, []);
+
+	const { ref: arrowTop, inView } = useInView();
 
 	return (
 		<Fragment>
@@ -64,6 +57,10 @@ export default function Home() {
 				<Head>
 					<title>Pokemon</title>
 					<meta name="description" content="catch pokemon" />
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1.0"
+					/>
 					<link
 						rel="icon"
 						href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAC4uLgAz8/PAAAAAAD///8A29vbAAAA/wCmpqYA6+vrAAAAhwAAAOMAkZGRAAAA1AAAAL0AAACmAAAAAAAAAAAAIiIiIiIiIiIiIiN0EGIiIiIjMzdBBqIiIjMzM3QQaiIiMzMzN0EGIiMzMyIidBBiIzMyIiInQQIiIiIiIiIiIiIiIiIiIiIiJVVSIiIlm9IlVVUiIlm8giJVVVVVm80iIlVVVVm82CIiJVVVm82CIiIiJVm80iIiIiIiIiIiIiL4HwAA4AcAAMADAACAAQAAgAEAAAAAAAADwAAAAkAAAAJAAAADwAAAAAAAAIABAACAAQAAwAMAAOAHAAD4HwAA"
@@ -100,7 +97,7 @@ export default function Home() {
 				<section className="h-screen">
 					<Container
 						className="px-5 sm:px-0 relative z-20
-            mt-16 md:mt-20 lg:mt-24 xl:mt-32"
+            			mt-16 md:mt-20 lg:mt-24 xl:mt-32"
 					>
 						<div
 							className="block lg:grid lg:grid-cols-2 items-center 
@@ -126,11 +123,7 @@ export default function Home() {
 					</Container>
 				</section>
 
-				<section
-					id="cardPokemon"
-					ref={numberSectionOne}
-					className="bg-slate-700/20"
-				>
+				<section id="cardPokemon" ref={arrowTop} className="bg-slate-700/20">
 					<Container className="px-5 sm:px-0 py-10">
 						<Link href="/#home" scroll={true}>
 							<a
@@ -139,7 +132,7 @@ export default function Home() {
                               transition duration-200 delay-200 ease-in-out group 
                               hover:bg-gradient-to-t hover:from-transparent hover:to-black/90
                               ${
-																top >= numberOf
+																inView
 																	? "scale-100 translate-y-0"
 																	: "scale-0 translate-y-full"
 															}`}
