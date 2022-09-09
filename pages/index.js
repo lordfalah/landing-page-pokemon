@@ -59,8 +59,9 @@ export default function Home() {
 					<meta name="description" content="catch pokemon" />
 					<meta
 						name="viewport"
-						content="width=device-width, initial-scale=1.0"
+						content="width=device-width, user-scalable=no"
 					/>
+
 					<link
 						rel="icon"
 						href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAC4uLgAz8/PAAAAAAD///8A29vbAAAA/wCmpqYA6+vrAAAAhwAAAOMAkZGRAAAA1AAAAL0AAACmAAAAAAAAAAAAIiIiIiIiIiIiIiN0EGIiIiIjMzdBBqIiIjMzM3QQaiIiMzMzN0EGIiMzMyIidBBiIzMyIiInQQIiIiIiIiIiIiIiIiIiIiIiJVVSIiIlm9IlVVUiIlm8giJVVVVVm80iIlVVVVm82CIiJVVVm82CIiIiJVm80iIiIiIiIiIiIiL4HwAA4AcAAMADAACAAQAAgAEAAAAAAAADwAAAAkAAAAJAAAADwAAAAAAAAIABAACAAQAAwAMAAOAHAAD4HwAA"
@@ -70,7 +71,7 @@ export default function Home() {
 
 				<div
 					className="bg-green-500/80 w-3/4 md:w-[55%] h-screen 
-          absolute top-0 right-0 before:-z-20"
+          			absolute top-0 right-0 before:-z-20"
 					style={{
 						clipPath: "polygon(20% 0%, 100% 0, 100% 100%, 0% 100%)",
 						WebkitClipPath: "polygon(20% 0%, 100% 0, 100% 100%, 0% 100%)",
@@ -80,11 +81,11 @@ export default function Home() {
 
 					<div
 						className="absolute bottom-4 lg:bottom-4 xl:bottom-0
-            flex justify-between items-center w-full px-10"
+            			flex justify-between items-center w-full px-10"
 					>
 						<GridImg
 							className="w-[120px] h-[50px] sm:w-40 sm:h-[55px] lg:w-52 
-              lg:h-20 xl:w-64 xl:h-28 overflow-hidden hidden md:block"
+              				lg:h-20 xl:w-64 xl:h-28 overflow-hidden hidden md:block"
 						/>
 						<SwapIcon className="flex justify-center items-center" />
 					</div>
@@ -101,12 +102,12 @@ export default function Home() {
 					>
 						<div
 							className="block lg:grid lg:grid-cols-2 items-center 
-              relative"
+              				relative"
 						>
 							<ContentArticle className="space-y-8 w-full" />
 							<ContentImg
 								className="w-1/2 absolute right-0 top-1/2 lg:mt-10 xl:mt-16 
-                2xl:mt-24 -translate-y-1/2 hidden lg:block"
+                				2xl:mt-24 -translate-y-1/2 hidden lg:block"
 							/>
 						</div>
 
@@ -127,10 +128,9 @@ export default function Home() {
 					<Container className="px-5 sm:px-0 py-10">
 						<Link href="/#home" scroll={true}>
 							<a
-								className={`bg-black/50 rounded-full cursor-pointer z-20
-                              w-11 h-11 fixed bottom-10 right-5 flex justify-center items-center
-                              transition duration-200 delay-200 ease-in-out group 
-                              hover:bg-gradient-to-t hover:from-transparent hover:to-black/90
+								className={`
+								bg-black/50 rounded-full cursor-pointer z-20
+                              w-11 h-11 fixed bottom-10 right-5 flex justify-center 		items-center transition duration-200 delay-200 ease-in-out group hover:bg-gradient-to-t hover:from-transparent hover:to-black/90
                               ${
 																inView
 																	? "scale-100 translate-y-0"
@@ -139,7 +139,7 @@ export default function Home() {
 							>
 								<DoubleUp
 									className="w-7 h-7 stroke-1 group-hover:stroke-2
-                group-hover:stroke-white transition duration-150 ease-linear"
+                					group-hover:stroke-white transition duration-150 ease-linear"
 								/>
 							</a>
 						</Link>
