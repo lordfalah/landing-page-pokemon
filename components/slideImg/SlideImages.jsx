@@ -16,7 +16,7 @@ const SlideImages = ({ className }) => {
 				whileHover={{ cursor: "grab" }}
 				whileTap={{ cursor: "grabbing" }}
 				className={`${addClass} mx-auto lg:mx-0 w-full
-        gap-8 `}
+        		gap-8 `}
 			>
 				{images.map((img, idx) => {
 					return (

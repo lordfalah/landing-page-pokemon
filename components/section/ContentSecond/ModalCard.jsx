@@ -6,11 +6,13 @@ import Paragraf from "../../text/Paragraf";
 import SubTitle from "../../text/SubTitle";
 import Image from "next/image";
 import Close from "../../../icon/Close";
-import useReSizeWindow from "../../../hooks/useReSizeWindow";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const ModalCard = ({ className }) => {
-	const { width } = useReSizeWindow();
+	const { ref: resize, entry } = useInView();
+
+	const width = entry?.boundingClientRect?.width;
 	const logic = width >= 640 ? 50 : 10;
 	const addClass = className ? className : "";
 
@@ -83,27 +85,28 @@ const ModalCard = ({ className }) => {
 			animate="show"
 			exit="out"
 			className={`fixed top-0 bottom-0 left-0 right-0 z-30 
-      bg-black/50 ${addClass}`}
+      		bg-black/50 ${addClass}`}
 		>
 			<motion.div
 				variants={childModal}
+				ref={resize}
 				style={{
 					boxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
 					WebkitBoxShadow: "0px 0px 25px 12px rgba(0,0,0,0.3) inset",
 				}}
 				className={`relative z-50 bg-white/80 left-0 w-11/12
-        right-0 top-1/2 -translate-y-1/2 rounded-lg pt-8 pb-6 sm:py-10
-        lg:py-12 lg:px-10 xl:px-20 gap-10 lg:gap-14 shadow-slate-600/50 
-        grid grid-cols-1 lg:grid-cols-2 items-center container mx-auto`}
+				right-0 top-1/2 -translate-y-1/2 rounded-lg pt-8 pb-6 sm:py-10
+				lg:py-12 lg:px-10 xl:px-20 gap-10 lg:gap-14 shadow-slate-600/50 
+				grid grid-cols-1 lg:grid-cols-2 items-center container mx-auto`}
 			>
 				<div
 					className="bg-white/80 w-4/5 sm:w-2/3 md:w-1/2 lg:w-full rounded-xl 
-          relative shadow-lg mx-auto"
+          			relative shadow-lg mx-auto"
 				>
 					<div
 						className="bg-white rounded-full h-14 w-14 sm:h-16 sm:w-16 
-            absolute sm:-right-3 sm:-top-5 shadow-md flex items-center 
-            -bottom-5 -right-2 justify-center p-4"
+						absolute sm:-right-3 sm:-top-5 shadow-md flex items-center 
+						-bottom-5 -right-2 justify-center p-4"
 					>
 						<SubTitle className="text-sm sm:text-base">
 							{dataPokemon?.weight}Kg
@@ -191,21 +194,17 @@ const ModalCard = ({ className }) => {
 							>
 								<SubTitle
 									className="col-span-2 text-left sm:text-right 
-                  justify-items-end text-black/50"
+                  					justify-items-end text-black/50"
 								>
 									{poke.agility}
 								</SubTitle>
 								<Paragraf
 									className="col-span-1 text-left sm:text-center
-                  text-black/60 font-medium
-                "
+                  					text-black/60 font-medium"
 								>
 									{poke.value}
 								</Paragraf>
-								<div
-									className="bg-black/20 shadow-inner w-full h-3 md:h-4 rounded-md
-                  overflow-hidden col-span-3"
-								>
+								<div className="bg-black/20 shadow-inner w-full h-3 md:h-4 rounded-md overflow-hidden col-span-3">
 									<div
 										style={{
 											width: `${

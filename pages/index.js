@@ -115,7 +115,7 @@ export default function Home() {
 
 						<div
 							className="w-fit lg:w-5/12 lg:mx-0 mx-auto justify-center 
-              gap-4 hidden sm:flex mt-7"
+              				gap-4 hidden sm:flex mt-7"
 						>
 							<ArrowLeft className="h-6 w-6" />
 							<p className="text-xl font-semibold">1 of 3</p>
