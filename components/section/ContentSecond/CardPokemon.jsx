@@ -3,6 +3,7 @@ import React from "react";
 import Paragraf from "../../text/Paragraf";
 import DetailsCard from "./DetailsCard";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const container = {
   show: {
@@ -41,39 +42,76 @@ const items = {
   out: { y: "-40%" },
 };
 
-const CardPokemon = ({ pokemon }) => {
-  const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+const CardPokemon = ({ pokemon, index = 0 }) => {
+  const {
+    ref: card,
+    inView,
+    entry,
+  } = useInView({
+    threshold: 0,
+    rootMargin: "300px",
+    triggerOnce: true,
+  });
 
-  const startDust = pokemon.game_indices
-    .map((data) => data.game_index)
-    .reduce((acc, arr) => acc + arr);
+  const name =
+    (pokemon &&
+      pokemon.name &&
+      pokemon.name[0]?.toUpperCase() + pokemon?.name?.slice(1)) ||
+    pokemon?.name;
 
-  const candy = pokemon.stats
-    .map((base) => base.base_stat)
-    .reduce((acc, arr) => acc + arr);
+  const startDust =
+    pokemon && pokemon.game_indices
+      ? pokemon.game_indices
+          .map((data) => data?.game_index)
+          .reduce((acc, arr) => acc + arr, 0)
+      : 0;
+
+  const candy =
+    pokemon && pokemon.stats
+      ? pokemon.stats
+          .map((base) => base?.base_stat)
+          .reduce((acc, arr) => acc + arr, 0)
+      : 0;
+
+  const image =
+    pokemon?.sprites?.other?.dream_world?.front_default ||
+    pokemon?.sprites?.other?.dream_world?.back_default;
 
   return (
     <motion.div
+      style={{
+        transitionDuration: "0.5s",
+        transitionDelay: `${0.1 * index}s`,
+      }}
+      ref={card}
       variants={container}
       initial="hidden"
       animate="show"
       exit="out"
-      className="bg-white relative rounded-md p-8 shadow-lg"
-      key={pokemon.name}
+      className={`bg-white  rounded-md p-8 shadow-lg transition ease-in-out  ${
+        inView ? "translate-y-0 !opacity-100" : "translate-y-full !opacity-0"
+      }`}
+      key={
+        pokemon?.name
+          ? pokemon?.name
+          : `${pokemon?.data?.id}-${pokemon?.name}-${index}`
+      }
     >
       <motion.div
         variants={items}
         className={`absolute left-0 right-0 -top-20 mx-auto w-2/5 sm:w-1/2`}
       >
-        <Image
-          src={pokemon?.sprites?.other?.dream_world?.front_default}
-          alt={pokemon?.name}
-          width="100%"
-          height="100%"
-          layout="responsive"
-          placeholder={pokemon?.name}
-          priority
-        />
+        {image && (
+          <Image
+            src={image}
+            alt={pokemon?.name}
+            width="100%"
+            height="100%"
+            layout="responsive"
+            placeholder={pokemon?.name}
+            priority
+          />
+        )}
       </motion.div>
 
       <div
@@ -87,41 +125,56 @@ const CardPokemon = ({ pokemon }) => {
         ></span>
         <div className="flex items-end gap-3">
           <Paragraf>
-            HP {pokemon.stats[0].base_stat}/{pokemon.stats[1].base_stat}
+            HP{" "}
+            {pokemon &&
+              pokemon.stats &&
+              pokemon.stats[0] &&
+              pokemon.stats[1] &&
+              `${pokemon.stats[0].base_stat}/${pokemon.stats[1].base_stat}`}
           </Paragraf>
           <span
             className="inline-block border-t border-t-black w-6 h-3
             rotate-90 origin-top"
           ></span>
           <Paragraf className="tracking-wide">
-            Xp {pokemon.base_experience}
+            Xp {(pokemon && pokemon?.base_experience) || 0}
           </Paragraf>
         </div>
       </div>
 
-      <DetailsCard name={pokemon.name} />
+      <DetailsCard name={pokemon ? pokemon.name : ""} />
 
       <div className="w-full text-center space-y-4">
         <div className="flex justify-between">
           <div>
             <Paragraf className="font-medium text-slate-500">
-              {pokemon.types[0].type.name}
-              {pokemon.types.length > 1 && <span> / </span>}
-              {pokemon.types.length > 1 && pokemon.types[1].type.name}
+              {pokemon &&
+                pokemon.types &&
+                pokemon.types[0] &&
+                pokemon.types[0].type &&
+                pokemon.types[0].type.name}
+
+              {pokemon && pokemon.types && pokemon.types.length > 1 && (
+                <span> / </span>
+              )}
+              {pokemon &&
+                pokemon.types &&
+                pokemon.types.length > 1 &&
+                pokemon.types[1].type.name}
             </Paragraf>
             <span className="text-sm">Type</span>
           </div>
 
           <div>
             <Paragraf className="font-medium text-slate-500">
-              {pokemon.weight}kg
+              {pokemon ? pokemon?.weight : "0"}kg
             </Paragraf>
             <span>Weight</span>
           </div>
 
           <div>
             <Paragraf className="font-medium text-slate-500">
-              {pokemon.height}m
+              {pokemon ? pokemon?.height : "0"}m
             </Paragraf>
             <span className="text-sm">Height</span>
           </div>

@@ -1,39 +1,34 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-query";
-import api from "../../../api/api";
-import { StateContext } from "../../../pages";
 import CardPokemon from "./CardPokemon";
 import { ImSpinner9 } from "react-icons/im";
 import ErrorCustom from "../../suspense/Error";
-import { AnimatePresence } from "framer-motion";
+import ArrowLongRight from "../../../icon/ArrowLongRight";
+import { renderPage } from "../../../utils/fetchApi";
+import BtnPokemon from "../../button/BtnPokemon";
+import ArrowLongLeft from "../../../icon/ArrowLongLeft";
+import { scrollingBtn } from "../../../utils/index";
+import Disabled from "../../../icon/Disabled";
+import MakeBtn from "../../button/MakeBtn";
+import { StateContext } from "../../../parts/pokeDex/CatchPokemon";
 
 const ContentCard = () => {
   const { searchPokemon } = useContext(StateContext);
-  const pokemonPromise = [];
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const getPokemonId = (id) =>
-    api.get(`pokemon/${id}`).then((response) => response.data);
-
-  for (let i = 1; i <= 20; i++) {
-    pokemonPromise.push(getPokemonId(i));
-  }
-
-  const getPokemon = async (value) => {
-    const nameOfValue = value.toLowerCase();
-
-    if (nameOfValue.length === 0) {
-      const response = await Promise.all(pokemonPromise);
-      return response;
-    } else {
-      const response = await getPokemonId(nameOfValue);
-      return response;
-    }
-  };
-
-  const { data, isSuccess, error, isError, isFetching, isLoading } = useQuery(
-    ["getPokemon", searchPokemon],
-    () => getPokemon(searchPokemon),
+  const {
+    isSuccess,
+    isLoading,
+    isError,
+    error,
+    data: pokemon,
+    isFetching,
+    isPreviousData,
+  } = useQuery(
+    ["pokemon", currentPage, searchPokemon],
+    () => renderPage(currentPage, searchPokemon),
     {
+      keepPreviousData: true,
       cacheTime: 2 * 60 * 1000,
       staleTime: 2000,
     }
@@ -49,23 +44,79 @@ const ContentCard = () => {
       </div>
 
       {isError && <ErrorCustom error={error} />}
+
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
         xl:grid-cols-4 gap-x-7 gap-y-28 mt-40"
       >
-        <AnimatePresence>
-          {isSuccess &&
-            searchPokemon.length === 0 &&
-            data?.map((pokemon) => {
-              return <CardPokemon key={pokemon.id} pokemon={pokemon} />;
-            })}
-        </AnimatePresence>
+        {isSuccess && !isError ? (
+          searchPokemon.length === 0 ||
+          (searchPokemon === "" && pokemon.length > 0) ? (
+            pokemon?.map((pok, idx) => {
+              return (
+                <CardPokemon
+                  key={`${idx} - ${pok?.data?.id}`}
+                  pokemon={pok?.data}
+                  index={idx}
+                />
+              );
+            })
+          ) : (
+            <>
+              {pokemon.map((pok, idx) => (
+                <CardPokemon
+                  key={`${idx} - ${pok?.data?.id}`}
+                  pokemon={pok}
+                  index={idx}
+                />
+              ))}
+            </>
+          )
+        ) : null}
+      </div>
 
-        <AnimatePresence>
-          {isSuccess && searchPokemon.length !== 0 && (
-            <CardPokemon pokemon={data} />
+      <div
+        className={`flex gap-5 justify-center  md-justify-end my-10 ${
+          isError ? "hidden" : ""
+        }`}
+      >
+        <MakeBtn
+          className={`${
+            currentPage <= 0 ? "cursor-not-allowed " : "cursor-pointer"
+          }`}
+          disabled={currentPage <= 0 ? true : false}
+          onClick={() => {
+            setCurrentPage((prev) => prev - 1);
+            scrollingBtn("#cardPokemon");
+          }}
+          title="Prev"
+        >
+          {currentPage <= 0 ? (
+            <Disabled className="group-hover:stroke-2 transition-all duration-150 ease-in-out group-hover:w-7 group-hover:h-7" />
+          ) : (
+            <ArrowLongLeft />
           )}
-        </AnimatePresence>
+        </MakeBtn>
+
+        <h1
+          style={{
+            textRendering: "optimizeLegibility",
+            textShadow: "-1px -1px 1px #111, 2px 2px 1px #363636",
+          }}
+          className="uppercase text-[#e0dfdc] text-4xl font-sans font-medium drop-shadow-md shadow-slate-700 "
+        >
+          {currentPage + 1}
+        </h1>
+
+        <MakeBtn
+          onClick={() => {
+            setCurrentPage((prev) => prev + 1);
+            scrollingBtn("#cardPokemon");
+          }}
+          title="Next"
+        >
+          <ArrowLongRight />
+        </MakeBtn>
       </div>
     </Fragment>
   );

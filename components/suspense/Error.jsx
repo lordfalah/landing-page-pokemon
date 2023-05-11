@@ -11,12 +11,12 @@ const ErrorCustom = ({ error }) => {
             bg-clip-text text-transparent bg-gradient-to-tr from-white 
             to-pink-800 drop-shadow-lg shadow-black"
         >
-          {error.response.status}
+          {error?.response?.status}
         </h1>
         <SubTitle className="text-5xl text-pink-700/80">
-          {error.response.data}
+          {error?.response?.data}
         </SubTitle>
-        <Paragraf className="font-normal text-2xl">{error.message}</Paragraf>
+        <Paragraf className="font-normal text-2xl">{error?.message}</Paragraf>
       </article>
     </div>
   );
