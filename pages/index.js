@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { Fragment } from "react";
-import Header from "../components/navbar/Header";
 import ContentLanding from "../parts/landing/ContentLanding";
 import LandingBG from "../parts/landing/LandingBG";
 import CatchPokemon from "../parts/pokeDex/CatchPokemon";
@@ -19,8 +18,6 @@ export default function Home() {
           type="image/x-icon"
         />
       </Head>
-
-      <Header className="py-4 fixed top-0 z-50" />
 
       <div className="Root relative bg-gray-100 ">
         <LandingBG />

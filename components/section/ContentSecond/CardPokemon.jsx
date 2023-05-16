@@ -42,7 +42,8 @@ const items = {
   out: { y: "-40%" },
 };
 
-const CardPokemon = ({ pokemon, index = 0 }) => {
+const CardPokemon = ({ pokemon, index = 0, className }) => {
+  const addClass = className ? className : "";
   const {
     ref: card,
     inView,
@@ -88,7 +89,7 @@ const CardPokemon = ({ pokemon, index = 0 }) => {
       initial="hidden"
       animate="show"
       exit="out"
-      className={`bg-white  rounded-md p-8 shadow-lg transition ease-in-out  ${
+      className={`bg-white rounded-md p-8 shadow-lg transition ease-in-out relative ${addClass} ${
         inView ? "translate-y-0 !opacity-100" : "translate-y-full !opacity-0"
       }`}
       key={

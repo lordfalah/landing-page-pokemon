@@ -29,8 +29,7 @@ const ContentArticle = ({ className }) => {
           </Paragraf>
 
           <button
-            className="bg-black text-white px-6 py-3 transition duration-150 
-        	ease-linear hover:shadow-xl shadow-slate-600 rounded-full inline-block"
+            className="bg-black text-white px-10 py-4 transition-all duration-200 rounded-full hover:translate-y-[-3px] hover:shadow-reguler2 relative active:-translate-y-px active:shadow-active2 after:content-[''] after:inline-block after:h-full after:w-full after:rounded-[100px] after:absolute after:top-0 after:left-0 after:-z-10 after:transition-all after:duration-[400ms] after:bg-black hover:after:scale-x-[1.4] hover:after:scale-y-[1.6] hover:after:opacity-0"
             type="button"
             onClick={() => scrollingBtn("#cardPokemon")}
           >

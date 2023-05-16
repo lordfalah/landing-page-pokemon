@@ -18,7 +18,7 @@ export const ThemeContext = React.createContext();
 const CatchPokemon = () => {
   const [searchPokemon, setSearchPokemon] = useState("");
   const { ref: arrowTop, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
   });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -38,21 +38,23 @@ const CatchPokemon = () => {
       </ThemeCards.Provider>
 
       <section
+        ref={arrowTop}
         id="cardPokemon"
         className="bg-slate-700/20 h-full"
-        ref={arrowTop}
       >
         <Container className="px-5 sm:px-0 py-10">
           <button
             onClick={() => scrollingBtn("html")}
             type="button"
-            className={`bg-black/50 rounded-full cursor-pointer z-20 w-11 h-11 fixed bottom-10 right-5 flex justify-center items-center transition duration-200 delay-200 ease-in-out group hover:bg-gradient-to-t hover:from-transparent hover:to-black/90 ${
-              inView ? "scale-100 translate-y-0" : "scale-0 translate-y-full"
+            className={`bg-white rounded-lg border-solid border border-[#e7eae8] cursor-pointer z-20 w-11 h-11 fixed right-5 flex justify-center items-center transition-all duration-150 ease-in-out group hover:bg-black drop-shadow-md ${
+              inView
+                ? "opacity-100 scale-100 bottom-10 animate-bounce"
+                : "scale-0 bottom-0 opacity-0"
             }`}
           >
             <DoubleUp
               className="w-7 h-7 stroke-1 group-hover:stroke-2
-          group-hover:stroke-white transition duration-150 ease-linear"
+            group-hover:stroke-white transition duration-150 ease-linear"
             />
           </button>
 

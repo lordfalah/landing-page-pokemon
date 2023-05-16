@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-query";
 import CardPokemon from "./CardPokemon";
-import { ImSpinner9 } from "react-icons/im";
 import ErrorCustom from "../../suspense/Error";
 import ArrowLongRight from "../../../icon/ArrowLongRight";
 import { renderPage } from "../../../utils/fetchApi";
@@ -30,26 +29,32 @@ const ContentCard = () => {
     {
       keepPreviousData: true,
       cacheTime: 2 * 60 * 1000,
-      staleTime: 2000,
+      staleTime: 5000,
     }
   );
 
   return (
     <Fragment>
-      <div className="flex justify-between my-8">
-        {isLoading && <div className="text-2xl font-semibold">Loading...</div>}
-        {isFetching && (
-          <ImSpinner9 size="40px" className="animate-spin text-cyan-600" />
-        )}
-      </div>
+      {isFetching ? (
+        <div className="flex justify-center mt-16 transition-all duration-150 ease-in-out">
+          <div className="flex items-center scale-150">
+            <span className="bar"></span>
+            <span
+              className="bar h-[35px] mx-[5px] my-0"
+              style={{ animationDelay: ".25s" }}
+            ></span>
+            <span className="bar" style={{ animationDelay: ".5s" }}></span>
+          </div>
+        </div>
+      ) : null}
 
       {isError && <ErrorCustom error={error} />}
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
-        xl:grid-cols-4 gap-x-7 gap-y-28 mt-40"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center
+        xl:grid-cols-4 gap-x-7 gap-y-28 mt-40 transition-all duration-150 ease-in-out"
       >
-        {isSuccess && !isError ? (
+        {isSuccess && !isError && !isFetching ? (
           searchPokemon.length === 0 ||
           (searchPokemon === "" && pokemon.length > 0) ? (
             pokemon?.map((pok, idx) => {
@@ -62,22 +67,23 @@ const ContentCard = () => {
               );
             })
           ) : (
-            <>
+            <Fragment>
               {pokemon.map((pok, idx) => (
                 <CardPokemon
                   key={`${idx} - ${pok?.data?.id}`}
                   pokemon={pok}
                   index={idx}
+                  className="sm:col-span-2 sm:justify-self-center sm:w-1/2 lg:col-start-2 lg:col-span-1 lg:w-full xl:col-span-4 xl:justify-self-center xl:w-1/4"
                 />
               ))}
-            </>
+            </Fragment>
           )
         ) : null}
       </div>
 
       <div
-        className={`flex gap-5 justify-center  md-justify-end my-10 ${
-          isError ? "hidden" : ""
+        className={`flex gap-5 justify-center md:justify-end my-10 ${
+          isError || searchPokemon.length > 0 ? "hidden" : ""
         }`}
       >
         <MakeBtn
