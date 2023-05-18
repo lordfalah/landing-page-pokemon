@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 import { GoPrimitiveDot } from "react-icons/go";
 import Button from "../../button/Button";
 import Paragraf from "../../text/Paragraf";
@@ -15,16 +14,17 @@ const ModalCard = ({ className }) => {
 
   const width = entry?.boundingClientRect?.width;
   const logic = width >= 640 ? 50 : 10;
-  const addClass = className ? className : "";
+  const addClass = className || "";
 
   const { setIsOpen } = useContext(ThemeCards);
   const { dataPokemon, color } = useContext(DataContext);
 
   const speed = dataPokemon.stats[0].base_stat;
   const specialDefense = dataPokemon?.stats[0]?.base_stat * 2;
-  const specialAttack = dataPokemon?.stats
-    .map((base) => base.base_stat)
-    .reduce((acc, arr) => acc + arr);
+  const specialAttack = dataPokemon?.stats.reduce(
+    (acc, base) => acc + base.base_stat,
+    0
+  );
   const defense = dataPokemon.weight + dataPokemon.height;
   const attack =
     dataPokemon?.base_experience / 2 + dataPokemon?.stats[0]?.base_stat;
@@ -37,13 +37,14 @@ const ModalCard = ({ className }) => {
     { agility: "Attack", value: Math.floor(attack) },
   ];
 
-  const name = dataPokemon?.name[0]?.toUpperCase() + dataPokemon?.name.slice(1);
-  const slash = dataPokemon?.types !== undefined && dataPokemon?.types.length;
+  const name =
+    dataPokemon?.name?.[0]?.toUpperCase() + dataPokemon?.name?.slice(1);
+  const slash = dataPokemon?.types?.length >= 2;
 
-  const typeOne = dataPokemon?.types[0]?.type?.name;
-  const typeTwo = slash >= 2 && dataPokemon?.types[1]?.type?.name;
+  const typeOne = dataPokemon?.types?.[0]?.type?.name;
+  const typeTwo = slash && dataPokemon?.types?.[1]?.type?.name;
 
-  const ability = dataPokemon?.abilities[0]?.ability?.name.toUpperCase();
+  const ability = dataPokemon?.abilities?.[0]?.ability?.name?.toUpperCase();
 
   const parentModal = {
     show: {

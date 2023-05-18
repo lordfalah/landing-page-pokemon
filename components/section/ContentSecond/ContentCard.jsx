@@ -51,10 +51,10 @@ const ContentCard = () => {
       {isError && <ErrorCustom error={error} />}
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center
-        xl:grid-cols-4 gap-x-7 gap-y-28 mt-40 transition-all duration-150 ease-in-out"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center  
+        xl:grid-cols-4 gap-x-7 gap-y-28 transition-all duration-150 ease-in-out mb-60 sm:mb-72"
       >
-        {isSuccess && !isError && !isFetching ? (
+        {isSuccess && !isError ? (
           searchPokemon.length === 0 ||
           (searchPokemon === "" && pokemon.length > 0) ? (
             pokemon?.map((pok, idx) => {
@@ -82,7 +82,7 @@ const ContentCard = () => {
       </div>
 
       <div
-        className={`flex gap-5 justify-center md:justify-end my-10 ${
+        className={`flex gap-5 justify-center md:justify-end mb-0 md:mb-20 ${
           isError || searchPokemon.length > 0 ? "hidden" : ""
         }`}
       >

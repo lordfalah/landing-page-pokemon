@@ -1,10 +1,9 @@
 import React, { Fragment, useContext } from "react";
 import api from "../../../api/api";
-
 import Button from "../../button/Button";
 import { ThemeContext } from "../../../parts/pokeDex/CatchPokemon";
-import { random_rgb } from "../../../utils";
-import { getPokemonId } from "../../../utils/fetchApi";
+import { randomRGB } from "../../../utils";
+import { getPokemonById } from "../../../utils/fetchApi";
 
 const DetailsCard = ({ name }) => {
   const { setIsOpen, setDataPokemon, setColor } = useContext(ThemeContext);
@@ -14,8 +13,8 @@ const DetailsCard = ({ name }) => {
 
     setDataPokemon(response.data);
     setIsOpen(true);
-    setColor(random_rgb());
-    getPokemonId(name);
+    setColor(randomRGB());
+    getPokemonById(name);
   };
 
   return (

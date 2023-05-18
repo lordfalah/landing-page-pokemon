@@ -3,23 +3,24 @@ import api from "../api/api";
 
 const renderPage = async (currentPage = 0, value = "") => {
   if (value.length === 0 || value === "") {
-    let checkCurrentPage = currentPage < 0 ? 0 : currentPage;
+    const checkCurrentPage = Math.max(currentPage, 0);
     const response = await api.get(
       `pokemon?limit=10&offset=${checkCurrentPage * 10}`
     );
-    const pokemon = await Promise.all(
-      response?.data?.results?.map(async (poke) => await axios.get(poke?.url))
-    );
+    const pokemonUrls = response?.data?.results?.map((poke) => poke?.url);
+    const pokemon = await Promise.all(pokemonUrls.map((url) => axios.get(url)));
 
     return pokemon;
   } else {
-    const namePokemon = value.toLocaleLowerCase();
-    const pokemon = await getPokemonId(namePokemon);
+    const namePokemon = value.toLowerCase();
+    const pokemon = await getPokemonById(namePokemon);
     return [pokemon];
   }
 };
 
-const getPokemonId = (id) =>
-  api.get(`pokemon/${id}`).then((response) => response.data);
+const getPokemonById = async (id) => {
+  const response = await api.get(`pokemon/${id}`);
+  return response.data;
+};
 
-export { getPokemonId, renderPage };
+export { getPokemonById, renderPage };

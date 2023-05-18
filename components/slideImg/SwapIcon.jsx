@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { FaFacebookF, FaTwitter, FaGoogle } from "react-icons/fa";
 import Facebook from "../../icon/sosmed/Facebook";
 import Twitter from "../../icon/sosmed/Twitter";
 import Instagram from "../../icon/sosmed/Instagram";

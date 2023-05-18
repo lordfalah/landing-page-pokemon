@@ -51,32 +51,27 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
   } = useInView({
     threshold: 0,
     rootMargin: "300px",
-    triggerOnce: true,
+    triggerOnce: false,
   });
 
   const name =
-    (pokemon &&
-      pokemon.name &&
-      pokemon.name[0]?.toUpperCase() + pokemon?.name?.slice(1)) ||
-    pokemon?.name;
+    (pokemon?.name &&
+      `${pokemon.name[0].toUpperCase()}${pokemon.name.slice(1)}`) ||
+    pokemon?.name ||
+    "";
 
-  const startDust =
-    pokemon && pokemon.game_indices
-      ? pokemon.game_indices
-          .map((data) => data?.game_index)
-          .reduce((acc, arr) => acc + arr, 0)
-      : 0;
+  const startDust = (pokemon?.game_indices || [])
+    .map((data) => data?.game_index || 0)
+    .reduce((acc, arr) => acc + arr, 0);
 
-  const candy =
-    pokemon && pokemon.stats
-      ? pokemon.stats
-          .map((base) => base?.base_stat)
-          .reduce((acc, arr) => acc + arr, 0)
-      : 0;
+  const candy = (pokemon?.stats || [])
+    .map((base) => base?.base_stat || 0)
+    .reduce((acc, arr) => acc + arr, 0);
 
   const image =
     pokemon?.sprites?.other?.dream_world?.front_default ||
-    pokemon?.sprites?.other?.dream_world?.back_default;
+    pokemon?.sprites?.other?.dream_world?.back_default ||
+    "";
 
   return (
     <motion.div
@@ -89,8 +84,10 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
       initial="hidden"
       animate="show"
       exit="out"
-      className={`bg-white rounded-md p-8 shadow-lg transition ease-in-out relative ${addClass} ${
-        inView ? "translate-y-0 !opacity-100" : "translate-y-full !opacity-0"
+      className={`bg-white rounded-md p-8 shadow-lg transition ease-in-out ${addClass} sticky top-0 ${
+        inView
+          ? "translate-y-36 sm:translate-y-52 !opacity-100"
+          : "translate-y-full !opacity-0"
       }`}
       key={
         pokemon?.name
