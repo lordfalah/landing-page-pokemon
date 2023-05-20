@@ -86,6 +86,7 @@ const CatchPokemon = () => {
           </StateContext.Provider>
         </Container>
       </section>
+      {/* <h1 className="text-4xl">ASHOLE</h1> */}
     </Fragment>
   );
 };

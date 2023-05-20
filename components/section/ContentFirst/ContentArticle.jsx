@@ -36,7 +36,7 @@ const ContentArticle = ({ className }) => {
             More Information
           </button>
         </article>
-        <SlideImages className="flex mt-20 2xl:mt-24" />
+        <SlideImages className="flex mt-14 sm:mt-20 2xl:mt-24" />
       </div>
     </Fragment>
   );

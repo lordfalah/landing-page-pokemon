@@ -52,7 +52,7 @@ const ContentCard = () => {
 
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center  
-        xl:grid-cols-4 gap-x-7 gap-y-28 transition-all duration-150 ease-in-out mb-60 sm:mb-72"
+        xl:grid-cols-4 gap-x-7 gap-y-28 transition-all duration-150 ease-in-out mb-52 sm:mb-72"
       >
         {isSuccess && !isError ? (
           searchPokemon.length === 0 ||

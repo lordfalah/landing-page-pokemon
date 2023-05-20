@@ -11,7 +11,7 @@ const SlideImages = ({ className }) => {
   const { ref: parent, entry } = useInView();
 
   return (
-    <div ref={parent} className="overflow-hidden w-full lg:w-3/4 slide-images">
+    <div ref={parent} className="overflow-hidden w-full lg:w-3/4 slide-images ">
       <motion.div
         drag="x"
         dragConstraints={{ right: 0, left: -entry?.boundingClientRect?.width }}

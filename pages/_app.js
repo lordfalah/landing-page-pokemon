@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import "../styles/globals.css";
-import { ReactQueryDevtools } from "react-query/devtools";
+// import { ReactQueryDevtools } from "react-query/devtools";
 
 function MyApp({ Component }) {
   const queryClient = new QueryClient();
@@ -8,7 +8,7 @@ function MyApp({ Component }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Component />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
