@@ -4,12 +4,14 @@ import CardPokemon from "./CardPokemon";
 import ErrorCustom from "../../suspense/Error";
 import ArrowLongRight from "../../../icon/ArrowLongRight";
 import { renderPage } from "../../../utils/fetchApi";
-import BtnPokemon from "../../button/BtnPokemon";
+
 import ArrowLongLeft from "../../../icon/ArrowLongLeft";
 import { scrollingBtn } from "../../../utils/index";
 import Disabled from "../../../icon/Disabled";
-import MakeBtn from "../../button/MakeBtn";
 import { StateContext } from "../../../parts/pokeDex/CatchPokemon";
+import Loading from "../../suspense/Loading";
+import SkeletonCard from "../../Content/SkeletonCard";
+import BtnPokemon from "../../button/BtnPokemon";
 
 const ContentCard = () => {
   const { searchPokemon } = useContext(StateContext);
@@ -35,19 +37,7 @@ const ContentCard = () => {
 
   return (
     <Fragment>
-      {isFetching ? (
-        <div className="flex justify-center mt-16 transition-all duration-150 ease-in-out">
-          <div className="flex items-center scale-150">
-            <span className="bar"></span>
-            <span
-              className="bar h-[35px] mx-[5px] my-0"
-              style={{ animationDelay: ".25s" }}
-            ></span>
-            <span className="bar" style={{ animationDelay: ".5s" }}></span>
-          </div>
-        </div>
-      ) : null}
-
+      {isFetching ? <Loading /> : null}
       {isError && <ErrorCustom error={error} />}
 
       <div
@@ -57,25 +47,43 @@ const ContentCard = () => {
         {isSuccess && !isError ? (
           searchPokemon.length === 0 ||
           (searchPokemon === "" && pokemon.length > 0) ? (
-            pokemon?.map((pok, idx) => {
-              return (
-                <CardPokemon
-                  key={`${idx} - ${pok?.data?.id}`}
-                  pokemon={pok?.data}
-                  index={idx}
+            isFetching ? (
+              pokemon.map((pok, idx) => (
+                <SkeletonCard
+                  key={idx}
+                  pok={pok}
+                  className={idx === 9 ? "mb-12" : "mb-0"}
                 />
-              );
-            })
+              ))
+            ) : (
+              pokemon?.map((pok, idx) => {
+                return (
+                  <CardPokemon
+                    key={`${idx} - ${pok?.data?.id}`}
+                    pokemon={pok?.data}
+                    index={idx}
+                  />
+                );
+              })
+            )
           ) : (
             <Fragment>
-              {pokemon.map((pok, idx) => (
-                <CardPokemon
-                  key={`${idx} - ${pok?.data?.id}`}
-                  pokemon={pok}
-                  index={idx}
-                  className="sm:col-span-2 sm:justify-self-center sm:w-1/2 lg:col-start-2 lg:col-span-1 lg:w-full xl:col-span-4 xl:justify-self-center xl:w-1/4"
-                />
-              ))}
+              {isFetching
+                ? pokemon.map((pok, idx) => (
+                    <SkeletonCard
+                      key={idx}
+                      pok={pok}
+                      className="sm:col-span-2 sm:justify-self-center sm:w-1/2 lg:col-start-2 lg:col-span-1 lg:w-full xl:col-span-4 xl:justify-self-center xl:w-1/4"
+                    />
+                  ))
+                : pokemon.map((pok, idx) => (
+                    <CardPokemon
+                      key={`${idx} - ${pok?.data?.id}`}
+                      pokemon={pok}
+                      index={idx}
+                      className="sm:col-span-2 sm:justify-self-center sm:w-1/2 lg:col-start-2 lg:col-span-1 lg:w-full xl:col-span-4 xl:justify-self-center xl:w-1/4"
+                    />
+                  ))}
             </Fragment>
           )
         ) : null}
@@ -86,7 +94,7 @@ const ContentCard = () => {
           isError || searchPokemon.length > 0 ? "hidden" : ""
         }`}
       >
-        <MakeBtn
+        <BtnPokemon
           className={`${
             currentPage <= 0 ? "cursor-not-allowed " : "cursor-pointer"
           }`}
@@ -102,7 +110,7 @@ const ContentCard = () => {
           ) : (
             <ArrowLongLeft />
           )}
-        </MakeBtn>
+        </BtnPokemon>
 
         <h1
           style={{
@@ -114,7 +122,7 @@ const ContentCard = () => {
           {currentPage + 1}
         </h1>
 
-        <MakeBtn
+        <BtnPokemon
           onClick={() => {
             setCurrentPage((prev) => prev + 1);
             scrollingBtn("#cardPokemon");
@@ -122,7 +130,7 @@ const ContentCard = () => {
           title="Next"
         >
           <ArrowLongRight />
-        </MakeBtn>
+        </BtnPokemon>
       </div>
     </Fragment>
   );

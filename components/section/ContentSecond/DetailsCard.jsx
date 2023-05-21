@@ -23,7 +23,7 @@ const DetailsCard = ({ name }) => {
         <Button
           type="button"
           className="bg-gradient-to-r from-green-400 to-blue-500/50
-          w-11/12 py-3 transition duration-300 hover:bg-right-top"
+          w-11/12 py-3 hover:bg-right-top hover:to-slate-100 "
           onClick={() => handleDetails(name)}
         >
           <span className="font-medium text-white">DETAILS</span>

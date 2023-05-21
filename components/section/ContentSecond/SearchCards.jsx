@@ -28,7 +28,7 @@ const SearchCards = ({ className }) => {
         focus:outline-none focus:border-sky-500 focus:ring-sky-500 
         focus:ring-inset sm:text-sm rounded-md w-full"
           autoComplete="off"
-          placeholder="Search for anything..."
+          placeholder="Search by id or names"
           type="text"
           name="search"
           value={searchPokemon}

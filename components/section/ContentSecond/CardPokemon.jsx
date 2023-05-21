@@ -44,6 +44,18 @@ const items = {
 
 const CardPokemon = ({ pokemon, index = 0, className }) => {
   const addClass = className ? className : "";
+  const transitionDelays = [
+    "0.2s",
+    "0.4s",
+    "0.6s",
+    "0.8s",
+    "1s",
+    "1.2s",
+    "1.4s",
+    "1.6s",
+    "1.8s",
+    "2s",
+  ];
   const {
     ref: card,
     inView,
@@ -74,20 +86,16 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
     "";
 
   return (
-    <motion.div
+    <div
       style={{
         transitionDuration: "0.5s",
         transitionDelay: `${0.1 * index}s`,
       }}
       ref={card}
-      variants={container}
-      initial="hidden"
-      animate="show"
-      exit="out"
       className={`bg-white rounded-md p-8 shadow-lg transition ease-in-out ${addClass} sticky top-0 ${
         inView
           ? "translate-y-36 sm:translate-y-52 !opacity-100"
-          : "translate-y-full !opacity-0"
+          : "translate-y-full !opacity-0 !delay-[0ms]"
       }`}
       key={
         pokemon?.name
@@ -95,9 +103,13 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
           : `${pokemon?.data?.id}-${pokemon?.name}-${index}`
       }
     >
-      <motion.div
-        variants={items}
-        className={`absolute left-0 right-0 -top-20 mx-auto w-2/5 sm:w-1/2`}
+      <div
+        style={{
+          transitionDelay: transitionDelays[index] || "0s",
+        }}
+        className={`absolute left-0 right-0 -top-20 mx-auto w-2/5 sm:w-1/2 transition ease-in-out duration-500  ${
+          inView ? "translate-y-0" : "-translate-y-[40%] !delay-[0ms]"
+        }`}
       >
         {image && (
           <Image
@@ -110,7 +122,7 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
             priority
           />
         )}
-      </motion.div>
+      </div>
 
       <div
         className="flex flex-col gap-6 items-center mt-24 
@@ -197,7 +209,7 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
