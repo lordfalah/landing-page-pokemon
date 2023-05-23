@@ -26,14 +26,11 @@ const SwapIcon = ({ className }) => {
 
   return (
     <Fragment>
-      <div
-        className={`flex gap-3 justify-evenly lg:justify-end w-full sm:w-fit ${addClass} `}
-      >
+      <div className={`${addClass} `}>
         {icons.map((icon, idx) => {
           return (
             <div
-              className={`rounded-full bg-white w-10 h-10 cursor-pointer transition duration-150 ease-in-out
-              flex justify-center items-center group relative hover:bg-transparent`}
+              className={`rounded-full bg-white w-10 h-10 cursor-pointer transition duration-150 ease-in-out flex justify-center items-center group relative z-10 hover:bg-transparent after:hover:content-[''] after:hover:absolute after:hover:inset-0 after:hover:bg-white after:hover:-z-10 after:hover:blur-md after:hover:rounded-full after:hover:opacity-80 after:hover:transition after:hover:ease-in after:hover:duration-150`}
               key={idx}
             >
               {icon.element}

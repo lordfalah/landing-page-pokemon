@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import SearchBold from "../../../icon/SearchBold";
-import { StateContext } from "../../../parts/pokeDex/CatchPokemon";
+import { StateContext } from "../pokeDex/CatchPokemon";
+import SearchBold from "../../icon/SearchBold";
 
 const SearchCards = ({ className }) => {
   const addClass = className ? className : "";

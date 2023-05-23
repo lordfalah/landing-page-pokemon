@@ -2,12 +2,12 @@ import React, { Fragment, useState } from "react";
 import Container from "../../components/Content/Container";
 import DoubleUp from "../../icon/DoubleUp";
 import Paragraf from "../../components/text/Paragraf";
-import SearchCards from "../../components/section/ContentSecond/SearchCards";
 import { useInView } from "react-intersection-observer";
-import ContentCard from "../../components/section/ContentSecond/ContentCard";
 import { AnimatePresence } from "framer-motion";
-import ModalCard from "../../components/section/ContentSecond/ModalCard";
-import { scrollingBtn } from "../../utils";
+import ContentCard from "../cards/ContentCard";
+import ModalCard from "../cards/ModalCard";
+import SearchCards from "../cards/SearchCards";
+import { scrollingBtn } from "../../helpers/utils";
 
 export const StateContext = React.createContext();
 export const ThemeCards = React.createContext();
@@ -44,12 +44,13 @@ const CatchPokemon = () => {
       >
         <Container className="px-5 sm:px-0 py-10">
           <button
+            aria-label="kembali ke atas"
             onClick={() => scrollingBtn("html")}
             type="button"
-            className={`bg-white rounded-lg border-solid border border-[#e7eae8] cursor-pointer z-20 w-11 h-11 fixed right-5 flex justify-center items-center transition-all duration-150 ease-in-out group hover:bg-black drop-shadow-md ${
+            className={`bg-white rounded-lg border-solid border border-[#e7eae8] cursor-pointer z-20 w-11 h-11 fixed right-5 flex justify-center items-center transition-all duration-500 ease-in-out group hover:bg-black drop-shadow-md ${
               inView
-                ? "opacity-100 scale-100 bottom-10 animate-bounce"
-                : "scale-0 bottom-0 opacity-0"
+                ? "opacity-100 scale-100 bottom-24 sm:bottom-10 animate-bounce"
+                : "-bottom-1/4 opacity-0"
             }`}
           >
             <DoubleUp
@@ -86,7 +87,6 @@ const CatchPokemon = () => {
           </StateContext.Provider>
         </Container>
       </section>
-      {/* <h1 className="text-4xl">ASHOLE</h1> */}
     </Fragment>
   );
 };

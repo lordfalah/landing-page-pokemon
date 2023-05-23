@@ -1,9 +1,9 @@
 import React, { Fragment, useContext } from "react";
-import api from "../../../api/api";
-import Button from "../../button/Button";
-import { ThemeContext } from "../../../parts/pokeDex/CatchPokemon";
-import { randomRGB } from "../../../utils";
-import { getPokemonById } from "../../../utils/fetchApi";
+import api from "../../helpers/api/api";
+import Button from "../../components/button/Button";
+import { ThemeContext } from "../pokeDex/CatchPokemon";
+import { randomRGB } from "../../helpers/utils";
+import { getPokemonById } from "../../helpers/utils/fetchApi";
 
 const DetailsCard = ({ name }) => {
   const { setIsOpen, setDataPokemon, setColor } = useContext(ThemeContext);

@@ -1,10 +1,16 @@
 import React from "react";
-import images from "../../components/images/ImageCards";
 import ImgShow from "./ImgShow";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import ArrowLeft from "../../icon/ArrowLeft";
 import ArrowRight from "../../icon/ArrowRight";
+
+const images = [
+  { source: "balbasaur.jpg", alt: "bulbasaur" },
+  { source: "cardPokemon.jpg", alt: "card Pokemon" },
+  { source: "pickPokemon.jpg", alt: "pick Pokemon" },
+  { source: "pikachu.jpg", alt: "pokemon pikachu" },
+];
 
 const SlideImages = ({ className }) => {
   const addClass = className ? className : "";

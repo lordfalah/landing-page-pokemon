@@ -1,46 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import Paragraf from "../../text/Paragraf";
-import DetailsCard from "./DetailsCard";
-import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
-const container = {
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 0.9,
-      type: "spring",
-      damping: 15,
-      delayChildren: 0.5,
-      staggerChildren: 1,
-    },
-  },
-
-  hidden: {
-    opacity: 0,
-  },
-
-  out: {
-    opacity: 0,
-  },
-};
-
-const items = {
-  show: {
-    y: 0,
-    transition: {
-      ease: "linear",
-      duration: 0.5,
-    },
-  },
-
-  hidden: {
-    y: "-40%",
-  },
-
-  out: { y: "-40%" },
-};
+import ImgLoad from "../../icon/ImgLoad";
+import Paragraf from "../../components/text/Paragraf";
+import DetailsCard from "./DetailsCard";
 
 const CardPokemon = ({ pokemon, index = 0, className }) => {
   const addClass = className ? className : "";
@@ -83,8 +46,7 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
   const image =
     pokemon?.sprites?.other?.dream_world?.front_default ||
     pokemon?.sprites?.other?.dream_world?.back_default ||
-    "";
-
+    false;
   return (
     <div
       style={{
@@ -111,7 +73,7 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
           inView ? "translate-y-0" : "-translate-y-[40%] !delay-[0ms]"
         }`}
       >
-        {image && (
+        {image ? (
           <Image
             src={image}
             alt={pokemon?.name}
@@ -121,6 +83,8 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
             placeholder={pokemon?.name}
             priority
           />
+        ) : (
+          <ImgLoad className={`w-32 h-32 animate-pulse mx-auto`} />
         )}
       </div>
 

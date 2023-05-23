@@ -1,17 +1,16 @@
 import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-query";
+import ErrorCustom from "../../components/suspense/Error";
+import ArrowLongRight from "../../icon/ArrowLongRight";
+import ArrowLongLeft from "../../icon/ArrowLongLeft";
+import Disabled from "../../icon/Disabled";
+import { StateContext } from "../pokeDex/CatchPokemon";
+import Loading from "../../components/suspense/Loading";
+import SkeletonCard from "../../components/Content/SkeletonCard";
+import BtnPokemon from "../../components/button/BtnPokemon";
 import CardPokemon from "./CardPokemon";
-import ErrorCustom from "../../suspense/Error";
-import ArrowLongRight from "../../../icon/ArrowLongRight";
-import { renderPage } from "../../../utils/fetchApi";
-
-import ArrowLongLeft from "../../../icon/ArrowLongLeft";
-import { scrollingBtn } from "../../../utils/index";
-import Disabled from "../../../icon/Disabled";
-import { StateContext } from "../../../parts/pokeDex/CatchPokemon";
-import Loading from "../../suspense/Loading";
-import SkeletonCard from "../../Content/SkeletonCard";
-import BtnPokemon from "../../button/BtnPokemon";
+import { scrollingBtn } from "../../helpers/utils";
+import { renderPage } from "../../helpers/utils/fetchApi.js";
 
 const ContentCard = () => {
   const { searchPokemon } = useContext(StateContext);

@@ -1,8 +1,8 @@
 import React from "react";
 import Search from "../../icon/Search";
 import Container from "../Content/Container";
-import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
+import DotGrid from "../../icon/DotGrid";
 
 const Header = ({ className }) => {
   const addClass = className ? className : "";
@@ -37,7 +37,7 @@ const Header = ({ className }) => {
               />
             </label>
 
-            <TbGridDots size="35px" className="text-white cursor-pointer" />
+            <DotGrid className="w-[35px] h-[35px] stroke-white" />
           </div>
         </nav>
       </Container>

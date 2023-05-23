@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { GoPrimitiveDot } from "react-icons/go";
-import Button from "../../button/Button";
-import Paragraf from "../../text/Paragraf";
-import SubTitle from "../../text/SubTitle";
-import Image from "next/image";
-import Close from "../../../icon/Close";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { DataContext, ThemeCards } from "../../../parts/pokeDex/CatchPokemon";
+import { DataContext, ThemeCards } from "../pokeDex/CatchPokemon";
+import SubTitle from "../../components/text/SubTitle";
+import Image from "next/image";
+import Paragraf from "../../components/text/Paragraf";
+import Button from "../../components/button/Button";
+import Close from "../../icon/Close";
 
 const ModalCard = ({ className }) => {
   const { ref: resize, entry } = useInView();
