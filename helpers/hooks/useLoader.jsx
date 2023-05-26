@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-const useLoader = (delay) => {
+const useLoader = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, delay);
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [delay]);
+  }, []);
   return isLoading;
 };
 

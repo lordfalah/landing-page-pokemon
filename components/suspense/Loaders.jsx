@@ -1,21 +1,64 @@
 import React from "react";
-const Loaders = ({ isLoading }) => {
+import { motion } from "framer-motion";
+
+const loaderStyle = {
+  show: {
+    x: "0%",
+    transition: {
+      ease: "linear",
+      delay: 0.5,
+      duration: 0.5,
+      when: "beforeChildren",
+    },
+  },
+  hidden: {
+    x: "-100%",
+  },
+
+  out: {
+    x: "100%",
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+const loadChild = {
+  show: {
+    opacity: 1,
+    scale: 1.1,
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      duration: 1,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+
+  out: {
+    opacity: 0,
+    scale: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+const Loaders = () => {
   return (
-    <div
-      className={`bg-gray-100 fixed inset-0 z-[80] ${
-        isLoading ? "w-full" : "w-0"
-      } overflow-hidden`}
-      style={{
-        WebkitTransition: "width 1s ease-in-out",
-        MozTransition: "width 1s ease-in-out",
-        OTransition: "width 1s ease-in-out",
-        transition: "width 1s ease-in-out",
-      }}
+    <motion.div
+      className={`bg-gray-100 fixed inset-0 z-[80] flex justify-center items-center`}
+      variants={loaderStyle}
+      initial="hidden"
+      animate="show"
+      exit="out"
     >
-      <div
-        className={`socket w-[200px] h-[200px] scale-100 sm:scale-125 fixed z-[100] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-300 ease-in-out ${
-          isLoading ? "opacity-100 scale-100" : "opacity-0 scale-0"
-        }`}
+      <motion.div
+        className={`socket w-[200px] h-[200px] z-[100]`}
+        variants={loadChild}
       >
         <div className="gel center-gel">
           <div className="hex-brick h1" />
@@ -202,8 +245,8 @@ const Loaders = ({ isLoading }) => {
           <div className="hex-brick h2" />
           <div className="hex-brick h3" />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

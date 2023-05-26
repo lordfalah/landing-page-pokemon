@@ -6,9 +6,10 @@ import CatchPokemon from "../parts/pokeDex/CatchPokemon";
 import { ModalProvider } from "../context/ModalProvider";
 import Loaders from "../components/suspense/Loaders";
 import useLoader from "../helpers/hooks/useLoader";
+import { AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  const isLoading = useLoader(2000);
+  const isLoading = useLoader();
 
   return (
     <Fragment>
@@ -24,10 +25,10 @@ export default function Home() {
         />
       </Head>
 
-      <Loaders isLoading={isLoading} />
+      <AnimatePresence>{isLoading ? <Loaders /> : null}</AnimatePresence>
 
       <div
-        className={`Root relative bg-gray-100 ${
+        className={`Root relative bg-gray-100 transition duration-500 ease-in-out ${
           isLoading ? "opacity-0" : "opacity-100"
         }`}
       >
