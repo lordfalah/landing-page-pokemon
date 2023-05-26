@@ -4,7 +4,6 @@ import { useInView } from "react-intersection-observer";
 import ImgLoad from "../../icon/ImgLoad";
 import Paragraf from "../../components/text/Paragraf";
 import DetailsCard from "./DetailsCard";
-import { ModalProvider } from "../../context/ModalProvider";
 
 const CardPokemon = ({ pokemon, index = 0, className }) => {
   const addClass = className ? className : "";

@@ -37,7 +37,7 @@ const ContentCard = () => {
   return (
     <Fragment>
       {isFetching || isLoading ? <Loading /> : null}
-      {isError && <ErrorCustom error={error} />}
+      {isError ? <ErrorCustom error={error} /> : null}
 
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center  

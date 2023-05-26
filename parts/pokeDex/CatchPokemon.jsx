@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import Container from "../../components/Content/Container";
 import DoubleUp from "../../icon/DoubleUp";
 import Paragraf from "../../components/text/Paragraf";

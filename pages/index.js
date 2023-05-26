@@ -4,8 +4,12 @@ import ContentLanding from "../parts/landing/ContentLanding";
 import LandingBG from "../parts/landing/LandingBG";
 import CatchPokemon from "../parts/pokeDex/CatchPokemon";
 import { ModalProvider } from "../context/ModalProvider";
+import Loaders from "../components/suspense/Loaders";
+import useLoader from "../helpers/hooks/useLoader";
 
 export default function Home() {
+  const isLoading = useLoader(2000);
+
   return (
     <Fragment>
       <Head>
@@ -20,7 +24,13 @@ export default function Home() {
         />
       </Head>
 
-      <div className="Root relative bg-gray-100 ">
+      <Loaders isLoading={isLoading} />
+
+      <div
+        className={`Root relative bg-gray-100 ${
+          isLoading ? "opacity-0" : "opacity-100"
+        }`}
+      >
         <LandingBG />
 
         <ContentLanding />
