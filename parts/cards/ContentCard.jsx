@@ -4,16 +4,16 @@ import ErrorCustom from "../../components/suspense/Error";
 import ArrowLongRight from "../../icon/ArrowLongRight";
 import ArrowLongLeft from "../../icon/ArrowLongLeft";
 import Disabled from "../../icon/Disabled";
-import { StateContext } from "../pokeDex/CatchPokemon";
 import Loading from "../../components/suspense/Loading";
 import SkeletonCard from "../../components/Content/SkeletonCard";
 import BtnPokemon from "../../components/button/BtnPokemon";
 import CardPokemon from "./CardPokemon";
 import { scrollingBtn } from "../../helpers/utils";
 import { renderPage } from "../../helpers/utils/fetchApi.js";
+import { SearchContext } from "../../context/SearchProvider";
 
 const ContentCard = () => {
-  const { searchPokemon } = useContext(StateContext);
+  const { searchPokemon } = useContext(SearchContext);
   const [currentPage, setCurrentPage] = useState(0);
 
   const {
@@ -36,7 +36,7 @@ const ContentCard = () => {
 
   return (
     <Fragment>
-      {isFetching ? <Loading /> : null}
+      {isFetching || isLoading ? <Loading /> : null}
       {isError && <ErrorCustom error={error} />}
 
       <div
@@ -95,7 +95,7 @@ const ContentCard = () => {
       >
         <BtnPokemon
           className={`${
-            currentPage <= 0 ? "cursor-not-allowed " : "cursor-pointer"
+            currentPage <= 0 ? "cursor-not-allowed" : "cursor-pointer"
           }`}
           disabled={currentPage <= 0 ? true : false}
           onClick={() => {

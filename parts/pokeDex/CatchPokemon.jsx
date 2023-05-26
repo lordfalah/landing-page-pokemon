@@ -1,41 +1,29 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import Container from "../../components/Content/Container";
 import DoubleUp from "../../icon/DoubleUp";
 import Paragraf from "../../components/text/Paragraf";
 import { useInView } from "react-intersection-observer";
-import { AnimatePresence } from "framer-motion";
 import ContentCard from "../cards/ContentCard";
 import ModalCard from "../cards/ModalCard";
 import SearchCards from "../cards/SearchCards";
 import { scrollingBtn } from "../../helpers/utils";
+import { ModalContext } from "../../context/ModalProvider";
+import { AnimatePresence } from "framer-motion";
+import { SearchProvider } from "../../context/SearchProvider";
 
 export const StateContext = React.createContext();
-export const ThemeCards = React.createContext();
-export const DataContext = React.createContext();
-export const ThemeToggle = React.createContext();
-export const ThemeContext = React.createContext();
 
 const CatchPokemon = () => {
-  const [searchPokemon, setSearchPokemon] = useState("");
   const { ref: arrowTop, inView } = useInView({
     threshold: 0.1,
   });
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [dataPokemon, setDataPokemon] = useState({});
-  const [color, setColor] = useState("");
+  const { isOpen } = useContext(ModalContext);
 
   return (
     <Fragment>
-      <ThemeCards.Provider value={{ isOpen: isOpen, setIsOpen: setIsOpen }}>
-        <DataContext.Provider
-          value={{ dataPokemon: dataPokemon, color: color }}
-        >
-          <AnimatePresence exitBeforeEnter>
-            {isOpen ? <ModalCard /> : null}
-          </AnimatePresence>
-        </DataContext.Provider>
-      </ThemeCards.Provider>
+      <AnimatePresence exitBeforeEnter>
+        {isOpen ? <ModalCard /> : null}
+      </AnimatePresence>
 
       <section
         ref={arrowTop}
@@ -59,12 +47,7 @@ const CatchPokemon = () => {
             />
           </button>
 
-          <StateContext.Provider
-            value={{
-              searchPokemon: searchPokemon,
-              setSearchPokemon: setSearchPokemon,
-            }}
-          >
+          <SearchProvider>
             <div className="text-center space-y-4">
               <h2 className="text-5xl font-normal tracking-tight text-black/80">
                 PokeDex
@@ -75,16 +58,8 @@ const CatchPokemon = () => {
               <SearchCards className="mx-auto" />
             </div>
 
-            <ThemeContext.Provider
-              value={{
-                setIsOpen: setIsOpen,
-                setDataPokemon: setDataPokemon,
-                setColor: setColor,
-              }}
-            >
-              <ContentCard />
-            </ThemeContext.Provider>
-          </StateContext.Provider>
+            <ContentCard />
+          </SearchProvider>
         </Container>
       </section>
     </Fragment>

@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import ContentLanding from "../parts/landing/ContentLanding";
 import LandingBG from "../parts/landing/LandingBG";
 import CatchPokemon from "../parts/pokeDex/CatchPokemon";
+import { ModalProvider } from "../context/ModalProvider";
 
 export default function Home() {
   return (
@@ -23,7 +24,9 @@ export default function Home() {
         <LandingBG />
 
         <ContentLanding />
-        <CatchPokemon />
+        <ModalProvider>
+          <CatchPokemon />
+        </ModalProvider>
       </div>
     </Fragment>
   );

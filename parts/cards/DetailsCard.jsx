@@ -1,12 +1,12 @@
 import React, { Fragment, useContext } from "react";
 import api from "../../helpers/api/api";
 import Button from "../../components/button/Button";
-import { ThemeContext } from "../pokeDex/CatchPokemon";
 import { randomRGB } from "../../helpers/utils";
 import { getPokemonById } from "../../helpers/utils/fetchApi";
+import { ModalContext } from "../../context/ModalProvider";
 
 const DetailsCard = ({ name }) => {
-  const { setIsOpen, setDataPokemon, setColor } = useContext(ThemeContext);
+  const { setIsOpen, setDataPokemon, setColor } = useContext(ModalContext);
 
   const handleDetails = async (name) => {
     const response = await api.get(`pokemon/${name}`);
