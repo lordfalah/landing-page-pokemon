@@ -26,7 +26,7 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
   } = useInView({
     threshold: 0,
     rootMargin: "300px",
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const name =
@@ -54,7 +54,7 @@ const CardPokemon = ({ pokemon, index = 0, className }) => {
         transitionDelay: `${0.1 * index}s`,
       }}
       ref={card}
-      className={`bg-white rounded-md p-8 shadow-lg transition ease-in-out ${addClass} sticky top-0 ${
+      className={`bg-white rounded-md p-8 shadow-lg transition ease-in-out ${addClass} sticky top-0 sm:static sm:top-auto ${
         inView
           ? "translate-y-36 sm:translate-y-52 !opacity-100"
           : "translate-y-full !opacity-0 !delay-[0ms]"

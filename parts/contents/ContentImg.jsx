@@ -5,7 +5,9 @@ const ContentImg = ({ className }) => {
   const addClass = className ? className : "";
 
   return (
-    <div className={`${addClass} w-0 lg:w-1/2 hidden lg:block`}>
+    <div
+      className={`${addClass} w-0 lg:w-1/2 mx-auto xl:w-2/5 hidden lg:block`}
+    >
       <Image
         src="/img/charizard.png"
         alt="Lizard"

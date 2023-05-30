@@ -28,9 +28,7 @@ export default function Home() {
       <AnimatePresence>{isLoading ? <Loaders /> : null}</AnimatePresence>
 
       <div
-        className={`Root relative bg-gray-100 transition duration-500 ease-in-out ${
-          isLoading ? "opacity-0" : "opacity-100"
-        }`}
+        className={`Root relative bg-gray-100 transition duration-500 ease-in-out`}
       >
         <LandingBG />
 

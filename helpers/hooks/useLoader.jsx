@@ -10,6 +10,13 @@ const useLoader = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (isLoading) {
+      window.scrollTo(0, () => null);
+    }
+  }, [isLoading]);
+
   return isLoading;
 };
 
